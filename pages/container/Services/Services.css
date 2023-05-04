@@ -1,10 +1,7 @@
 .app__specialMenu {
     flex-direction: column;
     background: var(--color-black);
-<<<<<<< HEAD
     border: 1px solid var(--color-golden);
-=======
->>>>>>> 56d4355dbec46cf6c32832d37b6033cb785f6ab9
 }
 
 .app__specialMenu-title {
