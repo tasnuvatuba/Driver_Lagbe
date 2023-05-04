@@ -1,0 +1,21 @@
+.app__carditem {
+    width: 100%;
+    background-color: #585858;
+    border-radius: 25px;
+    padding: 25px;
+
+}
+
+.app__carditem-img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.app__carditem-sub {
+    color: black;
+    width: 100%;
+    margin-top: 0.2rem;
+}
+
+

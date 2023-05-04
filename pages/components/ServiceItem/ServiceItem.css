@@ -1,0 +1,24 @@
+.app__serviceitem {
+    width: 100%;
+    margin: 1rem 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.app__serviceitem-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app__serviceitem-sub {
+    width: 100%;
+    margin-top: 0.2rem;
+}
+
+.app__serviceitem-name {
+    flex: 1;
+}
+
+
