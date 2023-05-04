@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import { FiFacebook, FiTwitter, FiInstagram } from 'react-icons/fi';
 
 import { FooterOverlay, Newsletter } from '../../components';
@@ -46,3 +47,15 @@ const Footer = () => (
 );
 
 export default Footer;
+=======
+
+import './Footer.css';
+
+const Footer = () => (
+  <div>
+    Footer
+  </div>
+);
+
+export default Footer;
+>>>>>>> 56d4355dbec46cf6c32832d37b6033cb785f6ab9

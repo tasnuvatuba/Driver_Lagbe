@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import React from 'react';
 
@@ -63,3 +64,16 @@ const Newsletter = () => {
 export default Newsletter;
 
 
+=======
+import React from 'react';
+
+import './Intro.css';
+
+const Intro = () => (
+  <div>
+    Intro
+  </div>
+);
+
+export default Intro;
+>>>>>>> 56d4355dbec46cf6c32832d37b6033cb785f6ab9
