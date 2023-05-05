@@ -3,8 +3,9 @@ import Newsletter from './Footer/Newsletter';
 import FooterOverlay from './Footer/FooterOverlay';
 import ServiceItem from './ServiceItem/ServiceItem';
 import Navbar from './Navbar/Navbar';
-import ReviewSlider from './ReviewSlider/ReviewSlider'
-import Card from './Card/Card'
+import ReviewSlider from './ReviewSlider/ReviewSlider';
+import Card from './Card/Card';
+import ProfileCard from './ProfileCard/ProfileCard';
 
 
 export {
@@ -15,4 +16,5 @@ export {
   Navbar,
   ReviewSlider,
   Card,
+  ProfileCard,
 };

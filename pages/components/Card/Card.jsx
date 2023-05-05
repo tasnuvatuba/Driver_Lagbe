@@ -24,3 +24,4 @@ const Card = ({img, name, review}) => (
 );
 
 export default Card
+

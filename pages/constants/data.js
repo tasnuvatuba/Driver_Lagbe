@@ -77,42 +77,42 @@ const awards = [
 
 const review = [
   {
-    imgUrl:'/chef.png' ,
+    imgUrl:'/1.jpg' ,
     name: 'Bib Gourmond',
     review: 'Lorem ipsum dolor sit amet, consectetur.',
   },
   {
-    imgUrl: '/chef.png',
+    imgUrl: '/1.jpg',
     name: 'Rising Star',
     review: 'Lorem ipsum dolor sit amet, consectetur.',
   },
   {
-    imgUrl: '/chef.png',
+    imgUrl: '/1.jpg',
     name: 'AA Hospitality',
     review: 'Lorem ipsum dolor sit amet, consectetur.',
   },
   {
-    imgUrl: '/chef.png',
+    imgUrl: '/1.jpg',
     name: 'Outstanding Chef',
     review: 'Lorem ipsum dolor sit amet, consectetur.',
   },
   {
-    imgUrl: '/chef.png',
+    imgUrl: '/1.jpg',
     name: 'Bib Gourmond',
     review: 'Lorem ipsum dolor sit amet, consectetur.',
   },
   {
-    imgUrl: '/chef.png',
+    imgUrl: '/1.jpg',
     name: 'Rising Star',
     review: 'Lorem ipsum dolor sit amet, consectetur.',
   },
   {
-    imgUrl: '/chef.png',
+    imgUrl: '/1.jpg',
     name: 'AA Hospitality',
     review: 'Lorem ipsum dolor sit amet, consectetur.',
   },
   {
-    imgUrl: '/chef.png',
+    imgUrl: '/1.jpg',
     name: 'Outstanding Chef',
     review: 'Lorem ipsum dolor sit amet, consectetur.',
   },
