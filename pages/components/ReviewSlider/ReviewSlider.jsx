@@ -5,7 +5,7 @@ import { Container, Row } from "react-bootstrap";
 
 
 import { BsInstagram, BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
-// import './ReviewSlider.css'
+import './ReviewSlider.css'
 
 
 
