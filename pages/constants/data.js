@@ -74,4 +74,49 @@ const awards = [
   },
 ];
 
-export default { serviceitemleft, serviceitemright, awards };
+
+const review = [
+  {
+    imgUrl:'/1.jpg' ,
+    name: 'Bib Gourmond',
+    review: 'Lorem ipsum dolor sit amet, consectetur.',
+  },
+  {
+    imgUrl: '/1.jpg',
+    name: 'Rising Star',
+    review: 'Lorem ipsum dolor sit amet, consectetur.',
+  },
+  {
+    imgUrl: '/1.jpg',
+    name: 'AA Hospitality',
+    review: 'Lorem ipsum dolor sit amet, consectetur.',
+  },
+  {
+    imgUrl: '/1.jpg',
+    name: 'Outstanding Chef',
+    review: 'Lorem ipsum dolor sit amet, consectetur.',
+  },
+  {
+    imgUrl: '/1.jpg',
+    name: 'Bib Gourmond',
+    review: 'Lorem ipsum dolor sit amet, consectetur.',
+  },
+  {
+    imgUrl: '/1.jpg',
+    name: 'Rising Star',
+    review: 'Lorem ipsum dolor sit amet, consectetur.',
+  },
+  {
+    imgUrl: '/1.jpg',
+    name: 'AA Hospitality',
+    review: 'Lorem ipsum dolor sit amet, consectetur.',
+  },
+  {
+    imgUrl: '/1.jpg',
+    name: 'Outstanding Chef',
+    review: 'Lorem ipsum dolor sit amet, consectetur.',
+  },
+];
+
+
+export default { serviceitemleft, serviceitemright, awards, review };

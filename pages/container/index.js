@@ -1,4 +1,5 @@
 import AboutUs from './AboutUs/AboutUs';
+import Review from './Review/Review';
 import Chef from './Chef/Chef';
 import FindUs from './Findus/FindUs';
 import Footer from './Footer/Footer';
@@ -10,6 +11,7 @@ import Services from './Services/Services';
 
 export {
   AboutUs,
+  Review,
   Chef,
   FindUs,
   Footer,
