@@ -20,9 +20,6 @@ const ProfileCard = ({img, name, desc}) => (
                 
                 
                 <p className="p__opensans" style={{ color: '#AAAAAA' }}>{desc}</p>
-    
-
-                <button className="button">View More</button>
             </div>
         </div>                
                     

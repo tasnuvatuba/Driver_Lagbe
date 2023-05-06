@@ -125,7 +125,7 @@
     }
 
     .app__navbar-login {
-        display: none;
+        display: flex;
     }
 
     .app__navbar-logo img {
