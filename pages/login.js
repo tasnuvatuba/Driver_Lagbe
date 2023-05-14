@@ -52,6 +52,8 @@ import {
             //homepage
             if(res.data === "successOwner"){
               //router.push('/ownerHomePage');
+              localStorage.setItem('username', username)
+              localStorage.setItem('username', "fabiha")
               router.push({
                 pathname: '/ownerHomePage',
                 query: { username: username }
@@ -60,6 +62,7 @@ import {
             }
             else if(res.data === "successDriver"){
               //router.push('/driverHomePage')
+              localStorage.setItem('username', username)
               router.push({
                 pathname: '/driverHomePage',
                 query: { username: username }

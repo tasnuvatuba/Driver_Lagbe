@@ -1,47 +1,44 @@
-import Image from 'next/image'
+import React, {useEffect, useState} from 'react';
 import data from '/pages/constants/data.js'
-import Card from '/pages/components/Card/Card.jsx'
 import ProfileCard from '/pages/components/ProfileCard/ProfileCard.jsx'
+import { useRouter } from 'next/router';
+import Services from "./Services";
 import './AvailableDriver.css'
 
 export default function Home() {
+
+  const [activeDrivers, setActiveDrivers] = useState([]);
+
+  useEffect(() => {
+
+    const fetchDrivers = async () => {
+      const services = new Services()
+      const drivers = await services.getActiveDrivers();
+      // console.log(drivers)
+      setActiveDrivers(drivers);
+    };
+
+    fetchDrivers();
+  }, []);
+
   return (
+    <div className='box'>
 
-    <main className='container mx-auto py-36 px-8 '>
-      <div className='grid lg:grid-cols-3 gap-6'>
-        
-      {data.review.map(card => (
+      <div className='container mx-auto py-36 px-8 '>
+            <div className='grid lg:grid-cols-3 gap-6'>
+             
+            {activeDrivers.map(user => (
+              // console.log(user)
+              <ProfileCard img = {user.imgUrl} name = {user.username} desc = {user.des} rating = {user.rating} fare = {user.fare} status = {user.status}/>
 
-        <ProfileCard img = {card.imgUrl} name = {card.name} desc = {card.review} />
-        // <div className='shadow-lg rounded-lg'>
-        //  <img className='rounded-t-lg' src={card.imgUrl} alt = ""/>
-        //  <div className='p-5'>
-        //  <h3 className='text-3*1 font-bold text-slate-700 mb-3'>{card.name}</h3>
-        //  <p>{card.review}</p>
-        //  </div>
-         
-        // </div>
-      ))}
-      </div>
-      
-    </main>
+            ))}
+            </div>
+            
+          </div>
+
+    </div>
     
-    // <div className='container mx-auto py-36 px-8 '>
-    //   <div className='grid grid-cols-3 gap-4'>
-        
-    //   {data.review.map(card => (
-    //     <div className="shadow-lg p-3 mb-5 bg-white rounded">
-    //      <img className='rounded-t-lg' src={card.imgUrl} alt = ""/>
-    //      <div className='p-5'>
-    //      <h3 className='text-3*1 font-bold text-slate-700 mb-3'>{card.name}</h3>
-    //      <p style={{ color: 'red' }}>{card.review}</p>
-    //      </div>
-         
-    //     </div>
-    //   ))}
-    //   </div>
-      
-    // </div>
+    
   )
 }
 

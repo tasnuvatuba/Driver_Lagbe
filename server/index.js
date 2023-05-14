@@ -10,6 +10,11 @@ const { request } = require('http');
 
 const app = express();
 
+app.get('/', (req, res) => {
+  res.send("hello world")
+})
+
+
 //middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -83,7 +88,7 @@ app.post('/registerAsOwner', (req, res) => {
         db.query(query3, [req.body.username, req.body.name, req.body.dob, req.body.gender, req.body.nId, req.body.phone, req.body.date, req.body.location], (err, rows) => {
           if (err) {console.log(err);}
           else{
-            res.send("success");
+            res.getAllDriverssend("success");
           } 
           
         });
@@ -139,9 +144,67 @@ app.post('/login', (req, res) => {
 
 })
 
+
+
+app.post('/getActiveDrivers', (req, res) => {
+  const query = "SELECT * FROM driver_account where status = ?";
+
+    db.query(query, [true], async (err, rows) =>{
+      
+      if(rows.length === 0){
+        res.send("no user with location");
+      }
+      else{ //compare pass
+        res.send(rows)
+      }
+    })
+})
+
+
+app.post('/getDriverProfile', (req, res) => {
+  const query = "SELECT * FROM driver_account where username = ?";
+    db.query(query, [req.body.username], async (err, rows) =>{
+      if(err)
+      {
+        res.send("no driver profile");
+      }
+      else{ //compare pass
+        res.send(rows)
+      }
+    })
+})
+
+
+
+app.post('/updateStatus', (req, res) => {
+  const { username, latitude, longitude, status } = req.body;
+  const query = 'UPDATE driver_account SET latitude = ?, longitude = ?, status = ? WHERE username = ?';
+  const params = [latitude, longitude, status, username];
+
+  db.query(query, params, (error, result) => {
+    if (error) {
+      console.error('Error updating location:', error);
+      res.status(500).json({ error: 'Failed to update status' });
+      res.send("Failed to update status");
+      return
+    }
+
+    else{
+      console.log('Status updated successfully!');
+      // res.status(200).json({ message: 'Status updated successfully' });
+      res.send("Status updated successfully")
+    }
+  });
+});
+
+
+
+
+
 app.get('/getUser', (req, res) => {
 res.send(req.user);
 })
+
   
 app.listen(3001, ()=>{
     console.log('server started at port 3001');

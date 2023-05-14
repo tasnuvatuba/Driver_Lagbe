@@ -1,0 +1,68 @@
+/* styles/Profile.module.css */
+
+/* public/styles.css */
+  
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  width: 100vw; /* Set the container width to fill the viewport */
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%; /* Make the profile section span the whole width */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  
+  .image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .info {
+    flex: 1;
+  }
+  
+  .name {
+    margin-top: 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .address, .phone, .description, .rating, .fare {
+    margin-bottom: 5px;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  

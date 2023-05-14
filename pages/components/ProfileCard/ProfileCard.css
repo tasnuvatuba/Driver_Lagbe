@@ -1,82 +1,177 @@
+/* === Google Font Import - Poppins === */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-.app__profilecard{
-  border-radius: 25px;
-  background-color: #FFF;
+*{
+  margin: 0rem;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-.image-content,
-.app__profilecard-content{
+body{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2f2f2;
+}
+
+
+.swiper{
+  width: 950px;
+}
+
+.card{
+  position: relative;
+  background: #fff;
+  border-radius: 20px;
+  margin: 20px 0;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card::before{
+  content: "";
+  position: absolute;
+  height: 40%;
+  width: 100%;
+  background: #7d2ae8;
+  border-radius: 20px 20px 0 0;
+}
+
+.card .card-content{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 14px;
-}
-.image-content{
+  padding: 30px;
   position: relative;
-  row-gap: 5px;
-  padding: 25px 0;
+  z-index: 100;
 }
-.overlay{
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #f8a23172;
-  border-radius: 25px 25px 0 25px;
-}
-.overlay::before,
-.overlay::after{
-  content: '';
-  position: absolute;
-  right: 0;
-  bottom: -40px;
-  height: 40px;
-  width: 40px;
-  background-color: #f8a23172;
-}
-.overlay::after{
-  border-radius: 0 25px 0 0;
-  background-color: #FFF;
-}
-.app__profilecard-image{
-  position: relative;
-  height: 150px;
-  width: 150px;
+
+ .card .image{
+  height: 140px;
+  width: 140px;
   border-radius: 50%;
-  background: #FFF;
   padding: 3px;
+  background: #7d2ae8;
 }
-.app__profilecard-image .app__profilecard-img{
+
+ .card .image img{
   height: 100%;
   width: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 4px solid #4070F4;
+  border: 3px solid #fff;
 }
 
-.app__profilecard-nameAndStatus{
+.card .media-icons{
+  position: absolute;
+  top: 10px;
+  right: 20px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.dot {
-  height: 15px;
-  width: 15px;
-  background-color: #56F000 ;
-  border-radius: 50%;
-  display: inline-block;
-  margin-left: 10px;
+.card .media-icons i{
+  color: #fff;
+  opacity: 0.6;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.card .media-icons i:hover{
+  opacity: 1;
+}
+
+
+
+
+.card .name-desc{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  color: blue;
+} 
+
+.name-desc .name{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.name-desc .desc{
+  font-size:15px;
+  font-weight: 500;
+}
+
+.name-desc .fare{
+  font-size: 15px;
+  font-weight: 400;
   margin-top: 5px;
 }
 
+.name-desc .status-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: green; /* Adjust the color as needed */
+  margin-right: 5px;
+}
 
 
+.card .rating{
+  display: flex;
+  align-items: center;
+  margin-top: 18px;
+}
 
-@media screen and (max-width: 768px) {
-  .slide-content{
-    margin: 0 10px;
-  }
-  .swiper-navBtn{
-    display: none;
-  }
+.card .rating i{
+  font-size: 18px;
+  margin: 0 2px;
+  color: #7d2ae8;
+}
+
+.card .button{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.card .button button{
+  background: #7d2ae8;
+  outline: none;
+  border: none;
+  color: #fff;
+  padding: 8px 22px;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.button button:hover{
+  background: #6616d0;
+}
+
+.swiper-pagination{
+  position: absolute;
+}
+
+.swiper-pagination-bullet{
+  height: 7px;
+  width: 26px;
+  border-radius: 25px;
+  background: #7d2ae8;
+}
+
+.swiper-button-next, .swiper-button-prev{
+  opacity: 0.7;
+  color: #7d2ae8;
+  transition: all 0.3s ease;
+}
+.swiper-button-next:hover, .swiper-button-prev:hover{
+  opacity: 1;
+  color: #7d2ae8;
 }
