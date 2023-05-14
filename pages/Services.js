@@ -2,15 +2,17 @@ import React, { useState } from "react";
 // import DefaultService from './DefaultService'
 import axios from 'axios'
 
+
+
 class Services {
 
     static instance = Services.instance || new Services()
 
     async getActiveDrivers() {
     try {
-      const response = await axios.post("http://localhost:3001/getActiveDrivers", {
-        withCredentials: true,
-      });
+      const response = await axios.post("http://localhost:3001/getActiveDrivers", 
+        {withCredentials: true},
+      );
       return response.data;
     } catch (error) {
       console.error("Error fetching active drivers:", error);
@@ -23,8 +25,9 @@ class Services {
     try {
       const response = await axios.post(
         "http://localhost:3001/getDriverProfile",
-        { username },
-        { withCredentials: true }
+         {username },
+        { withCredentials: true },
+         
       );
       const responseData = response.data;
       return responseData
@@ -40,7 +43,7 @@ class Services {
       const response = await axios.post(
         "http://localhost:3001/updateStatus",
         { username, latitude, longitude, status },
-        { withCredentials: true }
+        { withCredentials: true },
       );
       const responseData = response.data;
       return responseData
