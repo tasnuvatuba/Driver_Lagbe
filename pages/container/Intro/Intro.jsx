@@ -37,10 +37,6 @@ const Newsletter = () => {
       return;
     }
 
-    console.log('Hire Now - Source Address:', sourceAddress);
-    console.log('Hire Now - Destination Address:', destinationAddress);
-    console.log('Hire Now - Trip Type:', tripType);
-
     router.push({
       pathname: '/AvailableDriver',
       query: { sourcePage: 'Intro', srcAddr: sourceAddress, destAddr: destinationAddress, tripType: tripType }
@@ -63,11 +59,6 @@ const Newsletter = () => {
       });
       return;
     }
-
-    console.log('Hire Later - Source Address:', sourceAddress);
-    console.log('Hire Later - Destination Address:', destinationAddress);
-    console.log('Hire Later - Pick-up Time:', pickUpTime);
-    console.log('Hire Later - Trip Type:', tripType);
 
     router.push({
       pathname: '/AllDrivers',

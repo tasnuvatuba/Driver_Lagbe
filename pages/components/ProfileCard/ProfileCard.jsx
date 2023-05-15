@@ -41,9 +41,9 @@ const ProfileCard = ({img, name, desc, rating, fare, status, source}) => {
     }
 
     // Add half star if applicable
-    if (halfStar) {
-    stars.push(<FontAwesomeIcon key="half" icon={fasStarHalfAlt} />);
-  }
+      if (halfStar) {
+      stars.push(<FontAwesomeIcon key="half" icon={fasStarHalfAlt} />);
+    }
 
     // Add empty stars
     for (let i = 0; i < emptyStars; i++) {

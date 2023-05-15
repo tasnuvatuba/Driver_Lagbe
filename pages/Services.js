@@ -38,6 +38,23 @@ class Services {
 
   }
 
+  async getOwnerProfile(username) {
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/getOwnerProfile",
+         {username },
+        { withCredentials: true },
+         
+      );
+      const responseData = response.data;
+      return responseData
+    } catch (error) {
+      console.error("Error fetching owner's profile:", error);
+      return ;
+    }
+
+  }
+
   async getAllDrivers() {
     try {
       const response = await axios.post(
@@ -67,6 +84,42 @@ class Services {
       // Do something with the received data
     } catch (error) {
       console.error("Error updating status:", error);
+      return "Error updating status"
+    }
+  }
+
+  async updateDriverProfile(username, experience, phone, location, fare) {
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/updateDriverProfile",
+        {username, experience, phone, location, fare },
+        { withCredentials: true },
+      );
+      const responseData = response.data;
+      return responseData
+      console.log("Received data:", responseData);
+      // Do something with the received data
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      return "Error updating profile"
+    }
+  }
+
+  async updateOwnerProfile(username, phone, location) {
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/updateOwnerProfile",
+        {username, phone, location },
+        { withCredentials: true },
+      );
+      const responseData = response.data;
+      console.log("Received data:", responseData);
+      return responseData
+      
+      // Do something with the received data
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      return "Error updating profile"
     }
   }
 }

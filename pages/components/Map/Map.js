@@ -34,35 +34,17 @@ function ShowOnlineUsers({activeDrivers}) {
 
     if(users){
       users.forEach(user => {
-        const { latitude, longitude, username, des, rating} = user;
+        const { latitude, longitude, username, rating, fare} = user;
         const marker = L.marker([latitude, longitude],  {icon :onlineDriver}).addTo(map);
 
-
-        // const handleKnowMore = () => {
-        //   // Handle the "Know More" button click event
-        //   console.log(`Know More button clicked for user ${username}`);
-        //   // Add your custom logic here
-        // };
-
         const popupContent = `
-          <b>${username}</b><br>${rating}<br>${des}<br>
-          <button
-              type="button"
-              className="custom__button"
-              onClick={() => {
-                // Your click logic here
-                console.log('Button clicked!');
-              }}
-            >
-              Book for Later
-          </button>
-          <button onclick="handleKnowMore()">Know More</button>
+          <b>Name : ${username}</b><br>Rating: ${rating}<br>Fare: ${fare}<br>
+          <a href="/Profile?username=${username}"><h1> Know More </h1></a>
         `;
+
 
         marker.bindPopup(popupContent);
   
-        marker.openPopup();
-        // marker.bindPopup(`<b>${username}</b><br>${rating}<br>${des}`).openPopup();
       });
     }
   

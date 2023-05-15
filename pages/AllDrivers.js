@@ -31,7 +31,7 @@ export default function AvailableDriver() {
 
     fetchDrivers();
 
-    document.title = 'All Drivers | Your Website Title';
+    document.title = 'All Drivers | Driver Lagbe';
   }, []);
 
   // Handle sorting option change

@@ -2,6 +2,7 @@ import React from 'react';
 import './DriverNavbar.css';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiFillCar } from 'react-icons/ai';
+import { navigate } from 'react-router-dom';
 
 import { Button, ButtonGroup, Center } from '@chakra-ui/react'
 
@@ -17,9 +18,11 @@ import {
   MenuOptionGroup,
   MenuDivider,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router';
 
 
 const Navbar = () => {
+  const router = useRouter();
 
   const openSmallWindow = () => {
     const smallWindow = window.open('', '_blank', 'width=900,height=700');
@@ -30,6 +33,18 @@ const Navbar = () => {
     }
   };
   const [toggleMenu, setToggleMenu] = React.useState(false);
+
+  const handleLogout = () => {
+    // Perform logout actions here
+    console.log('Logout function called');
+    localStorage.removeItem('username');
+    localStorage.removeItem('status');
+    localStorage.setItem('role', 'guest');
+    router.push('/');
+    // Add your logout logic, such as clearing local storage, redirecting, etc.
+  };
+
+
   return (
     <nav className="app__drivernavbar">
       {/* <div className="app__drivernavbar-logo">
@@ -43,9 +58,12 @@ const Navbar = () => {
       </ul>
       <div className="app__drivernavbar-features">
       <li>
-          <Link href="">
+          <Link href={{
+              pathname: '/registerAsDriver',
+              query: { purpose: 'editProfile' },
+            }}>
             <a>
-            {/* <img className = "profileimage" src="/user.png" alt = 'dp'/> */}
+            <img className = "profileimage" src="/user.png" alt = 'dp'/>
             </a>
           </Link>
         </li>
@@ -61,10 +79,9 @@ const Navbar = () => {
           <MenuList>
             <MenuItem onClick={openSmallWindow}>Status Update</MenuItem>
             <MenuItem>Received Requests</MenuItem>
-            <MenuItem as="a" href="/AvailableDriver">All Drivers</MenuItem>
             <MenuItem>Edit Profile</MenuItem>
             <MenuDivider />
-            <MenuItem>Log Out</MenuItem>
+            <MenuItem onClick={handleLogout}>Log Out</MenuItem>
             
           </MenuList>
         </Menu>
@@ -77,9 +94,8 @@ const Navbar = () => {
             <ul className="app__drivernavbar-smallscreen_links">
               <li className="p__opensans"><a href="#home" onClick={() => setToggleMenu(false)}>Status Update</a></li>
               <li className="p__opensans"><a href="#about" onClick={() => setToggleMenu(false)}>Received Requests</a></li>
-              <li className="p__opensans"><a href="/AvailableDriver" onClick={() => setToggleMenu(false)}>All Drivers</a></li>
               <li className="p__opensans"><a href="#contact" onClick={() => setToggleMenu(false)}>Edit Profile</a></li>
-              <li className="p__opensans"><a href="#contact" onClick={() => setToggleMenu(false)}>Log Out</a></li>
+              <li className="p__opensans"><a href="#" onClick={() => { setToggleMenu(false); handleLogout(); }}>Log Out</a></li>
             </ul>
           </div>
         )}

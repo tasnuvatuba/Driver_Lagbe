@@ -17,10 +17,23 @@ import {
   MenuOptionGroup,
   MenuDivider,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router';
 
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Perform logout actions here
+    console.log('Logout function called');
+    localStorage.removeItem('username');
+    localStorage.removeItem('status');
+    localStorage.setItem('role', 'guest');
+    router.push('/');
+    // Add your logout logic, such as clearing local storage, redirecting, etc.
+  };
+  
   return (
     <nav className="app__drivernavbar">
       {/* <div className="app__drivernavbar-logo">
@@ -34,7 +47,10 @@ const Navbar = () => {
       </ul>
       <div className="app__drivernavbar-features">
       <li>
-          <Link href="/profile">
+            <Link href={{
+              pathname: '/registerAsOwner',
+              query: { purpose: 'editProfile' },
+            }}>
             <a>
             <img className = "profileimage" src="/user.png" alt = 'dp'/>
             </a>
@@ -55,7 +71,7 @@ const Navbar = () => {
             <MenuItem>All Drivers</MenuItem>
             <MenuItem>Edit Profile</MenuItem>
             <MenuDivider />
-            <MenuItem>Log Out</MenuItem>
+            <MenuItem onClick={handleLogout}>Log Out</MenuItem>
             
           </MenuList>
         </Menu>
@@ -71,7 +87,7 @@ const Navbar = () => {
               <li className="p__opensans"><a href="#about" onClick={() => setToggleMenu(false)}>Sent Requests</a></li>
               <li className="p__opensans"><a href="#services" onClick={() => setToggleMenu(false)}>All Drivers</a></li>
               <li className="p__opensans"><a href="#contact" onClick={() => setToggleMenu(false)}>Edit Profile</a></li>
-              <li className="p__opensans"><a href="#contact" onClick={() => setToggleMenu(false)}>Log Out</a></li>
+              <li className="p__opensans"><a href="#" onClick={() => { setToggleMenu(false); handleLogout(); }}>Log Out</a></li>
             </ul>
           </div>
         )}

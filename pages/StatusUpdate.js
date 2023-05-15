@@ -51,7 +51,7 @@ function StatusUpdate() {
    
     const response = services.updateStatus(username, latitude, longitude, status);
 
-    if(response === "Failed to update status"){
+    if(response === "Failed to update status" || response === "Error updating status"){
       toast({
         title: 'Error',
         description: response,
