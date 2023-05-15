@@ -20,6 +20,7 @@ import {
   import { useState } from 'react';
   import axios from "axios";
   import { useRouter } from 'next/router';
+import { colors } from './constants/colors';
   
   export default function SignupCard() {
     const [registerUsername, setRegisterUsername] = useState('');
@@ -55,10 +56,10 @@ import {
               age--;
             }
 
-            if(age<0){
+            if(age<18){
               toast({
                 title: 'Error',
-                description: 'Age must be positive',
+                description: 'Age must be more than 18',
                 status: 'error',
                 duration: 5000,
                 isClosable: true,
@@ -139,7 +140,7 @@ import {
         minH={'100vh'}
         align={'center'}
         justify={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')}>
+        bg={colors.bg_light}>
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
           <Stack align={'center'}>
             <Heading fontSize={'4xl'} textAlign={'center'}>
@@ -198,17 +199,17 @@ import {
                   onClick={register}
                   loadingText="Submitting"
                   size="lg"
-                  bg={'blue.400'}
+                  bg={colors.bt_light}
                   color={'white'}
                   _hover={{
-                    bg: 'blue.500',
+                    bg: colors.bt_dark
                   }}>
                   Register
                 </Button>
               </Stack>
               <Stack pt={6}>
                 <Text align={'center'}>
-                  Already a user? <Link href="/login" color={'blue.400'}>Login</Link>
+                  Already a user? <Link href="/login" color={colors.bt_dark} fontWeight="bold">Login</Link>
                 </Text>
               </Stack>
             </Stack>

@@ -19,13 +19,13 @@ import {
 } from '@chakra-ui/react'
 
 
-const Navbar = () => {
+const Navbar = ({username}) => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
   return (
     <nav className="app__drivernavbar">
-      {/* <div className="app__drivernavbar-logo">
+      {/* { <div className="app__drivernavbar-logo">
         <img src={images.gericht} alt="app__logo" />
-      </div> */}
+      </div> }   */}
       <ul className="app__drivernavbar-links">
         <li className="p__opensans"><a href="#home">Home</a></li>
         <li className="p__opensans"><a href="#about">About</a></li>
@@ -51,7 +51,11 @@ const Navbar = () => {
           <MenuList>
             <MenuItem>Book For Now</MenuItem>
             <MenuItem>Book For Later</MenuItem>
-            <MenuItem>Sent Requests</MenuItem>
+            <MenuItem>
+              <Link href={{pathname: '../sentRequest', query:{username}}}>
+                <a>Sent Requests</a>
+              </Link>
+            </MenuItem>
             <MenuItem>All Drivers</MenuItem>
             <MenuItem>Edit Profile</MenuItem>
             <MenuDivider />

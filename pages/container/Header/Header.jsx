@@ -8,7 +8,7 @@ import Link from 'next/link';
 const Header = () => (
   <div className="app__header app__wrapper section__padding" id="home">
     <div className="app__wrapper_info">
-      <SubHeading title="Hit The Road" />
+      <SubHeading title="" />
       <h1 className="app__header-h1">Hire or Be A Part Time Driver</h1>
       <p className="p__opensans" style={{ margin: '2rem 0' }}>Sit tellus lobortis sed senectus vivamus molestie. Condimentum volutpat morbi facilisis quam scelerisque sapien. Et, penatibus aliquam amet tellus </p>
         <Link 

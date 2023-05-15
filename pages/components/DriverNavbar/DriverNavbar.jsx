@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react'
 
 
-const Navbar = () => {
+const Navbar = ({username}) => {
 
   const openSmallWindow = () => {
     const smallWindow = window.open('', '_blank', 'width=900,height=700');
@@ -60,8 +60,8 @@ const Navbar = () => {
           </MenuButton>
           <MenuList>
             <MenuItem onClick={openSmallWindow}>Status Update</MenuItem>
-            <MenuItem>Received Requests</MenuItem>
-            <MenuItem as="a" href="/AvailableDriver">All Drivers</MenuItem>
+            <MenuItem><Link href={{ pathname: '../receivedRequest', query: { username } }}><a>Received Requests</a></Link></MenuItem>
+            <MenuItem>All Drivers</MenuItem>
             <MenuItem>Edit Profile</MenuItem>
             <MenuDivider />
             <MenuItem>Log Out</MenuItem>

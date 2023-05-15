@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     /* change color if want to */
-    background: var(--color-black);
+    background: var(--color-grey);
 
     padding: 1rem 2rem;
 }
@@ -29,7 +29,7 @@
 }
 
 .app__drivernavbar-links li:hover {
-    color: var(--color-grey);
+    color: var(--color-golden);
 }
 
 .app__drivernavbar-features {
@@ -51,7 +51,7 @@
 .app__drivernavbar-features div {
     width: 1px;
     height: 30px;
-    background: var(--color-grey);
+    background: var(--color-white);
 }
 
 .app__drivernavbar-smallscreen {

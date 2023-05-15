@@ -2,12 +2,20 @@ import React, { useEffect, useState } from 'react';
 import ProfileCard from '/pages/components/ProfileCard/ProfileCard.jsx';
 import Services from "./Services";
 import './AvailableDriver.css';
-import { Radio, RadioGroup, Stack, Button} from '@chakra-ui/react';
+import { Radio, RadioGroup, Stack, Button, color} from '@chakra-ui/react';
 import Link from 'next/link';
 import Head from 'next/head';
-
+import { useRouter } from 'next/router';
+import { colors } from "./constants/colors";
 
 export default function AvailableDriver() {
+  const router = useRouter();
+  const { username, srcPage, srcAddr, destAddr, tripType } = router.query;
+
+  console.log(srcPage, srcAddr, destAddr, tripType);
+
+
+
   const [activeDrivers, setActiveDrivers] = useState([]);
   const [sortingOption, setSortingOption] = useState('rating'); // Default sorting option
 
@@ -59,7 +67,11 @@ export default function AvailableDriver() {
         >
         <a>
         <Button
-          colorScheme="teal"
+          bg={colors.bt_light}
+          _hover={{
+            bg: colors.bt_dark
+          }}
+          color='white'
           size="md"
           mb={4}
           className="search-button"
@@ -89,6 +101,11 @@ export default function AvailableDriver() {
               rating={user.rating}
               fare={user.fare}
               status={user.status}
+              srcPage={srcPage}
+              srcAddr={srcAddr}
+              destAddr={destAddr}
+              tripType={tripType}
+              username = {username} //owner username
             />
           ))}
         </div>

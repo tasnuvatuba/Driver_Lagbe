@@ -15,6 +15,7 @@ import {
     useColorModeValue,
     useToast,
   } from '@chakra-ui/react';
+  import {colors} from "./constants/colors"
   import { RadioGroup } from "@chakra-ui/react";
   import { HStack, VStack } from "@chakra-ui/react";
   import { Radio } from "@chakra-ui/react";
@@ -105,7 +106,7 @@ import {
         minH={'100vh'}
         align={'center'}
         justify={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')}>
+        bg={colors.bg_light}>
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
           <Stack align={'center'}>
             <Heading fontSize={'4xl'}>Login</Heading>
@@ -128,18 +129,18 @@ import {
                 <FormLabel> Please select one</FormLabel>
                 <RadioGroup onChange={setLoginType} value={loginType}>
                   <HStack spacing='24px'>
-                    <Radio value='owner'>Car Owner</Radio>
-                    <Radio value='driver'>Driver</Radio>
+                    <Radio value='owner' checkedColor={colors.bt_light}>Car Owner</Radio>
+                    <Radio value='driver' checkedColor={colors.bt_light}>Driver</Radio>
                   </HStack>
                 </RadioGroup>
               </FormControl>
               <Stack spacing={10}>
                 <Button
                   onClick={login}
-                  bg={'blue.400'}
+                  bg={colors.bt_light}
                   color={'white'}
                   _hover={{
-                    bg: 'blue.500',
+                    bg: colors.bt_dark
                   }}>
                   Login
                 </Button>
@@ -149,8 +150,8 @@ import {
               align={'start'}
               justify={'space-between'}>
               <Text>Not registered yet? </Text>
-              <Link href="/registerAsOwner" color={'blue.400'}>Register as a Car Owner</Link>
-              <Link href="/registerAsDriver" color={'blue.400'}>Register as a Driver</Link>
+              <Link href="/registerAsOwner" color={colors.bt_dark} fontWeight="bold">Register as a Car Owner</Link>
+              <Link href="/registerAsDriver" color={colors.bt_dark} fontWeight="bold">Register as a Driver</Link>
               </VStack>
             </Stack>
           </Box>

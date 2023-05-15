@@ -1,4 +1,5 @@
-import React from 'react'
+import axios from "axios";
+import React, { useEffect, useState } from 'react';
 import './ProfileCard.css'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,13 +8,25 @@ import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStarHalfAlt as fasStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { useRouter } from 'next/router';
+import { Avatar, Box, Center, Heading, Text, Divider, Button, useToast, Flex, VStack} from '@chakra-ui/react';
 import Link from 'next/link';
 
 // Add the star icons to the Font Awesome library
 library.add(fasStar, farStar, fasStarHalfAlt);
 
 
-const ProfileCard = ({img, name, desc, rating, fare, status, source}) => {
+const ProfileCard = ({img, name, desc, rating, fare, status, source, srcPage, srcAddr, destAddr, tripType, username}) => { //name-> driver username, username -> owner username
+  
+  const [isClicked, setIsClicked] = useState(false);
+  const toast = useToast();
+  
+  const now = new Date();
+  const options = { 
+    dateStyle: 'full', 
+    timeStyle: 'long' 
+  };
+  const time = now.toLocaleString(undefined, options);
+
   const getStatusColor = (status) => {
     if (status == 1) {
       return 'green';
@@ -23,7 +36,7 @@ const ProfileCard = ({img, name, desc, rating, fare, status, source}) => {
   };
 
   
-  
+  console.log("ProfileCard: ",name, srcPage, srcAddr, destAddr, tripType, username);
 
   const statusColor = getStatusColor(status);
 
@@ -61,8 +74,53 @@ const ProfileCard = ({img, name, desc, rating, fare, status, source}) => {
   const handleAboutMeClick = () => {
     router.push({
       pathname: '/Profile',
-      query: { username: name }
+      query: { driverUsername: name, srcPage: srcPage, srcAddr: srcAddr, destAddr: destAddr, tripType: tripType, ownerUsername: username }
     })
+  };
+
+  const handleSendRequest = () => {
+    setIsClicked(true);
+
+        axios({
+            method: 'post',
+            withCredentials: true,
+            data: {
+              driverUsername: name,
+              ownerUsername: username,
+              source: srcAddr,
+              destination: destAddr,
+              typeOfTrip: tripType,
+              time: time,
+              status: "pending"
+
+            },
+            url: 'http://localhost:3001/sendRequest'
+          })
+            .then(res => {
+                if(res.data == "success"){
+                toast({
+                    title: 'Success',
+                    description: "Request sent successfully",
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                });
+                }
+                else{
+                toast({
+                    title: 'Error',
+                    description: "Error occcured",
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                });
+
+                }
+                
+            })
+            .catch(err => {
+                console.log(err);
+            })
   };
 
   return(
@@ -88,8 +146,13 @@ const ProfileCard = ({img, name, desc, rating, fare, status, source}) => {
           {source !== 'Header' && (
           <div className="Button">
             <button className="aboutMe" onClick={handleAboutMeClick}>
-              More About Me
+              View Profile 
             </button>
+            {!isClicked ? (<button className="aboutMe" onClick={handleSendRequest}>Send Request</button>)
+            :(<Text color='green.400'>Request Sent!</Text>)}
+            
+            
+            
           </div>
         )}
         </div>

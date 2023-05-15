@@ -9,7 +9,9 @@ import { useRouter } from 'next/router';
 
 
 
-const Newsletter = () => {
+const Newsletter = ({username}) => {
+  console.log(username);
+
   const toast = useToast();
   const router = useRouter();
   const [selected, setSelected] = React.useState(new Set(["Trip Type"]));
@@ -17,6 +19,7 @@ const Newsletter = () => {
     () => Array.from(selected).join(", ").replaceAll("_", " "),
     [selected]
   );
+  //const currentDate = new Date();
   const currentDate = new Date().toISOString().split('T')[0];
   // console.log("current date " + currentDate)
 
@@ -43,7 +46,7 @@ const Newsletter = () => {
 
     router.push({
       pathname: '/AvailableDriver',
-      query: { sourcePage: 'Intro', srcAddr: sourceAddress, destAddr: destinationAddress, tripType: tripType }
+      query: { username: username, srcPage: 'Intro', srcAddr: sourceAddress, destAddr: destinationAddress, tripType: tripType }
     })
   };
 
@@ -83,7 +86,6 @@ const Newsletter = () => {
     <div className="app__booking">
       <div className="app__booking-heading">
         <h1 className="headtext__cormorant">Start Your Journey</h1>
-         <SubHeading title="Hire A Driver" />
       </div>
 
       <div className='grid-container'>

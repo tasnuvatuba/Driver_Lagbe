@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { AboutUs, Review, Gallery, Footer, Header, Intro, Services } from './container';
 import { Navbar } from './components';
 import './index.css';

@@ -7,7 +7,6 @@ import './Services.css';
 const SpecialMenu = () => (
   <div className="app__specialMenu flex__center section__padding" id="services">
     <div className="app__specialMenu-title">
-      <SubHeading title="Services that meet your requirements" />
       <h1 className="headtext__cormorant">Our Services</h1>
     </div>
 
@@ -21,9 +20,6 @@ const SpecialMenu = () => (
         </div>
       </div>
 
-      <div className="app__specialMenu-menu_img">
-        <img src={images.menu} alt="menu__img" />
-      </div>
 
       <div className="app__specialMenu-menu_cocktails  flex__center">
         {/* <p className="app__specialMenu-menu_heading">Cocktails</p> */}

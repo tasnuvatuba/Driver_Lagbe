@@ -11,7 +11,7 @@ const ServiceItem = ({ title, tags }) => (
     </div>
 
     <div className="app__serviceitem-sub">
-      <p className="p__opensans" style={{ color: '#AAAAAA' }}>{tags}</p>
+      <p className="p__opensans" style={{ color: '#FFFFFF' }}>{tags}</p>
     </div>
   </div>
 );

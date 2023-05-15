@@ -88,7 +88,7 @@ app.post('/registerAsOwner', (req, res) => {
         db.query(query3, [req.body.username, req.body.name, req.body.dob, req.body.gender, req.body.nId, req.body.phone, req.body.date, req.body.location], (err, rows) => {
           if (err) {console.log(err);}
           else{
-            res.getAllDriverssend("success");
+            res.send("success");
           } 
           
         });
@@ -145,9 +145,10 @@ app.post('/login', (req, res) => {
 })
 
 
+///////////////////////////
 
 app.post('/getActiveDrivers', (req, res) => {
-  const query = "SELECT * FROM driver_account where status = ?";
+  const query = "SELECT * FROM driver_info where status = ?";
 
     db.query(query, [true], async (err, rows) =>{
       
@@ -162,7 +163,7 @@ app.post('/getActiveDrivers', (req, res) => {
 
 
 app.post('/getDriverProfile', (req, res) => {
-  const query = "SELECT * FROM driver_account where username = ?";
+  const query = "SELECT * FROM driver_info where username = ?";
     db.query(query, [req.body.username], async (err, rows) =>{
       if(err)
       {
@@ -176,7 +177,7 @@ app.post('/getDriverProfile', (req, res) => {
 
 
 app.post('/getAllDrivers', (req, res) => {
-  const query = "SELECT * FROM driver_account";
+  const query = "SELECT * FROM driver_info";
     db.query(query, [], async (err, rows) =>{
       if(err)
       {
@@ -191,7 +192,7 @@ app.post('/getAllDrivers', (req, res) => {
 
 app.post('/updateStatus', (req, res) => {
   const { username, latitude, longitude, status } = req.body;
-  const query = 'UPDATE driver_account SET latitude = ?, longitude = ?, status = ? WHERE username = ?';
+  const query = 'UPDATE driver_info SET latitude = ?, longitude = ?, status = ? WHERE username = ?';
   const params = [latitude, longitude, status, username];
 
   db.query(query, params, (error, result) => {
@@ -209,6 +210,142 @@ app.post('/updateStatus', (req, res) => {
     }
   });
 });
+
+
+//////////////////////////////
+app.post('/driverProfile', (req, res) => {
+  
+  //const query = "INSERT INTO owner_account (`username`, `password`) VALUES (?,?)";
+    const query = "SELECT * FROM driver_info where username = ?";
+
+    db.query(query, [req.body.username] ,async (err, rows) => {
+      if (err) {
+        console.log(err);
+      }
+      if (rows.length > 0) {
+        res.send(rows[0]);
+      }
+      else{
+        console.log("not found");
+      }
+      
+    })
+})
+
+app.post('/sendRequest', (req, res) => {
+  
+  const query = "INSERT INTO request (driver, owner, source, destination, typeOfTrip, time, status) VALUES (?,?,?,?,?,?,?)";
+
+    db.query(query, [req.body.driverUsername, req.body.ownerUsername, req.body.source, req.body.destination, req.body.typeOfTrip, req.body.time, req.body.status] ,async (err, rows) => {
+      if (err) {
+        console.log(err);
+        res.send("error");
+      }
+      else{
+        res.send("success");
+      }
+      
+    })
+})
+
+app.post('/sentRequest', (req, res) => {
+
+  const query = "SELECT * FROM request where owner = ?";
+
+    db.query(query, [req.body.ownerUsername] ,async (err, rows) => {
+      if (err) {
+        console.log(err);
+        res.send("error");
+      }
+      else{
+        res.send(rows);
+      }
+      
+    })
+})
+
+app.post('/receivedRequest', (req, res) => {
+
+  const query = "SELECT * FROM request where driver = ?";
+
+    db.query(query, [req.body.driverUsername] ,async (err, rows) => {
+      if (err) {
+        console.log(err);
+        res.send("error");
+      }
+      else{
+        res.send(rows);
+      }
+      
+    })
+})
+
+app.post('/requestConf', (req, res) => {
+
+  const query = "UPDATE request SET status = ? WHERE id = ?";
+
+    db.query(query, [req.body.status, req.body.id] ,async (err, rows) => {
+      if (err) {
+        console.log(err);
+        res.send("error");
+      }
+      else{
+        res.send("success");
+      }
+      
+    })
+})
+
+app.post('/rating', (req, res) => {
+  const query = "UPDATE request SET rating = ? WHERE id = ?";
+  
+  const query2 = "SELECT * FROM driver_info where username = ?";
+  const query3 = "UPDATE driver_info SET rating = ?, totalRating = ? WHERE username = ?";
+
+
+    db.query(query, [req.body.rating, req.body.id] ,async (err, rows) => {
+      if (err) {
+        console.log(err);
+      }
+      else{
+        console.log("success");
+      }
+      
+    })
+
+    db.query(query2, [req.body.username] ,async (err, rows) => {
+      let rating = parseFloat(req.body.rating);
+      let totalRating = 1;
+      if (err) {
+        console.log(err);
+      }
+      else if(rows[0].rating === null){
+        console.log("Null ",rating);
+      }
+      else if(rows[0].rating !== null){
+        rating = (parseFloat(rows[0].rating) * parseFloat(rows[0].totalRating) + parseFloat(req.body.rating)) / (parseFloat(rows[0].totalRating) +1);
+        totalRating = (parseFloat(rows[0].totalRating) +1);
+        console.log("not Null ", rating);
+
+      }
+
+      db.query(query3, [rating, totalRating, req.body.username] ,async (err, rows) => {
+        if (err) {
+          console.log(err);
+        }
+        else{
+          console.log("success");
+        }
+        
+      })
+
+
+      
+    })
+
+
+})
+
 
 
 

@@ -1,6 +1,6 @@
 .app__review {
     flex-direction: column;
-    background: var(--color-black);
+    background: var(--color-white);
 }
 
 .app__review-title {
