@@ -38,6 +38,22 @@ class Services {
 
   }
 
+  async getAllDrivers() {
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/getAllDrivers",
+        { withCredentials: true },
+         
+      );
+      const responseData = response.data;
+      return responseData
+      } catch (error) {
+        console.error("Error fetching driver's profile:", error);
+        return ;
+      }
+
+  }
+
   async updateStatus(username, latitude, longitude, status) {
     try {
       const response = await axios.post(

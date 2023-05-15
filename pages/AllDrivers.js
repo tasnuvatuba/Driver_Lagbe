@@ -1,27 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import ProfileCard from '/pages/components/ProfileCard/ProfileCard.jsx';
 import Services from "./Services";
-import './AvailableDriver.css';
+import './AllDrivers.css';
 import { Radio, RadioGroup, Stack, Button} from '@chakra-ui/react';
-import Link from 'next/link';
 import Head from 'next/head';
 
 
+
 export default function AvailableDriver() {
-  const [activeDrivers, setActiveDrivers] = useState([]);
+  const [allDrivers, setAllDrivers] = useState([]);
   const [sortingOption, setSortingOption] = useState('rating'); // Default sorting option
+  const [sourcePage, setSourcePage] = useState("");
+  
 
 
   useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const sourcePage = queryParams.get('sourcePage');
+    
+
+    // Use the sourcePage value in your logic
+    console.log('sourcePage:', sourcePage);
+    setSourcePage(sourcePage)
+
     const fetchDrivers = async () => {
       const services = new Services();
-      const drivers = await services.getActiveDrivers();
-      setActiveDrivers(drivers);
+      const drivers = await services.getAllDrivers();
+      setAllDrivers(drivers);
     };
 
     fetchDrivers();
 
-    document.title = 'Available Drivers | Your Website Title';
+    document.title = 'All Drivers | Your Website Title';
   }, []);
 
   // Handle sorting option change
@@ -30,8 +40,8 @@ export default function AvailableDriver() {
   };
 
   // Sort the active drivers based on the selected sorting option
-  const sortActiveDrivers = () => {
-    const sortedDrivers = [...activeDrivers];
+  const sortAllDrivers = () => {
+    const sortedDrivers = [...allDrivers];
     if (sortingOption === 'rating-high-to-low') {
       sortedDrivers.sort((a, b) => b.rating - a.rating);
     } else if (sortingOption === 'rating-low-to-high') {
@@ -47,27 +57,10 @@ export default function AvailableDriver() {
 
   return (
     <div className='box'>
-      <Head>
-        <title>Available Drivers | Driver Lagbe</title>
+        <Head>
+        <title>AllDrivers | Driver Lagbe</title>
       </Head>
-      
       <div className='container mx-auto py-36 px-8 '>
-
-
-      <Link 
-        href="/SearchByLocation"
-        >
-        <a>
-        <Button
-          colorScheme="teal"
-          size="md"
-          mb={4}
-          className="search-button"
-        >
-          Search by Location
-        </Button>
-        </a>
-      </Link>
 
 
       <RadioGroup value={sortingOption} onChange={handleSortingOptionChange} mb={4}>
@@ -80,7 +73,7 @@ export default function AvailableDriver() {
       </RadioGroup>
 
         <div className='grid lg:grid-cols-3 gap-6'>
-          {sortActiveDrivers().map(user => (
+          {sortAllDrivers().map(user => (
             <ProfileCard
               key={user.id}
               img={user.imgUrl}
@@ -89,6 +82,7 @@ export default function AvailableDriver() {
               rating={user.rating}
               fare={user.fare}
               status={user.status}
+              source = {sourcePage}
             />
           ))}
         </div>

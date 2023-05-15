@@ -175,6 +175,19 @@ app.post('/getDriverProfile', (req, res) => {
 })
 
 
+app.post('/getAllDrivers', (req, res) => {
+  const query = "SELECT * FROM driver_account";
+    db.query(query, [], async (err, rows) =>{
+      if(err)
+      {
+        res.send("no driver");
+      }
+      else{ //compare pass
+        res.send(rows)
+      }
+    })
+})
+
 
 app.post('/updateStatus', (req, res) => {
   const { username, latitude, longitude, status } = req.body;

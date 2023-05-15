@@ -7,12 +7,13 @@ import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStarHalfAlt as fasStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 // Add the star icons to the Font Awesome library
 library.add(fasStar, farStar, fasStarHalfAlt);
 
 
-const ProfileCard = ({img, name, desc, rating, fare, status}) => {
+const ProfileCard = ({img, name, desc, rating, fare, status, source}) => {
   const getStatusColor = (status) => {
     if (status == 1) {
       return 'green';
@@ -20,6 +21,9 @@ const ProfileCard = ({img, name, desc, rating, fare, status}) => {
       return 'red';
     }
   };
+
+  
+  
 
   const statusColor = getStatusColor(status);
 
@@ -63,10 +67,8 @@ const ProfileCard = ({img, name, desc, rating, fare, status}) => {
 
   return(
     
-  <div className="swiper mySwiper container">
-    <div className="swiper-wrapper content">
 
-      <div className="swiper-slide card">
+      <div className="card">
         <div className="card-content">
           <div className="image">
             <img src="/1.jpg" alt=""/>
@@ -83,17 +85,15 @@ const ProfileCard = ({img, name, desc, rating, fare, status}) => {
 
           <div className="rating">{starIcons}</div>
 
-          <div className="button">
-          {/* <button className="aboutMe" onClick={handleAboutMeClick}>More About Me</button> */}
-          <button className="aboutMe" onClick={handleAboutMeClick}>More About Me</button>
-            {/* <button className="hireMe">Hire Me</button> */}
+          {source !== 'Header' && (
+          <div className="Button">
+            <button className="aboutMe" onClick={handleAboutMeClick}>
+              More About Me
+            </button>
           </div>
+        )}
         </div>
       </div>
-      
-
-    </div>
-  </div>
 
   
                     

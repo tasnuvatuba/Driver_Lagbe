@@ -1,4 +1,9 @@
+.box{
+  align-items: center;
+}
+
 .container {
+    height: 100%;
     width: 100%;
   }
   @media (min-width: 640px) {
@@ -47,7 +52,7 @@
     }
   }
   .mx-auto {
-    margin-top: 15rem;
+    /* margin-top: 15rem; */
     margin-left: auto;
     margin-right: auto;
   }
@@ -75,7 +80,7 @@
     padding-right: 2rem;
   }
   .py-36 {
-    padding-top: 9rem;
+    padding-top: 5rem;
     padding-bottom: 9rem;
   }
 

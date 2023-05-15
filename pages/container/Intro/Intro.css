@@ -11,14 +11,35 @@
 
 .app__booking-dropdown {
     flex-direction: row;
-    margin-top: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
 }
 
 .app__booking-input {
+    /* Add your styles for the input section */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .flex__center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+/* .app__booking-input {
     flex-direction: row;
     margin-top: 3rem;
     margin-bottom: 3rem;
-}
+} */
 
 .app__booking-input input {
     width: 620px;
@@ -29,6 +50,7 @@
     color: var(--color-white);
     
     margin-right: 2rem;
+    margin-bottom: 2rem;
     padding: 0.75rem 1rem;
     background: var(--color-black);
 }

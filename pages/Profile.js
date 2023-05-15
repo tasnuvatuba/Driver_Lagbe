@@ -5,9 +5,7 @@ import { useRouter } from 'next/router';
 import Services from './Services';
 
 
-function PrintDriver({driverProfile}){
-  console.log(driverProfile)
-}
+
 
 export default function Profile() {
   const router = useRouter()
@@ -16,27 +14,26 @@ export default function Profile() {
   const [driverProfile, setDriverProfile] = useState([])
 
   useEffect(() => {
-
     const fetchDriverProfile = async () => {
-      const services = new Services()
+      const services = new Services();
       const profileData = await services.getDriverProfile(username);
-      console.log( profileData[0])
       setDriverProfile(profileData[0]);
     };
 
-    fetchDriverProfile();
-  }, []);
+    if (username) {
+      fetchDriverProfile();
+    }
+  }, [username]); // Run the effect whenever username changes
 
+  if (!driverProfile) {
+    // Render a loading state or fallback UI when driverProfile is null
+    return <div>Loading...</div>;
+  }
+ 
 
   return (
     <div className="container">
-      <Head>
-        <title>User Profile</title>
-        <link rel="stylesheet" href="/styles.css" />
-      </Head>
-
-      <PrintDriver driverProfile = {driverProfile}/>
-      
+ 
       <h1 className="title">User Profile</h1>
 
       <div className="profile">
@@ -48,11 +45,8 @@ export default function Profile() {
                   <p className="phone">Phone Number: {driverProfile.phone}</p>
                   <p className="description">Description: {driverProfile.des}</p>
                   <p className="rating">Rating: {driverProfile.rating}</p>
-                  <p className="fare">Fare: ${driverProfile.fare}/hour</p>
+                  <p className="fare">Fare: ${driverProfile.fare}/hour</p> 
                 </div>
-            
-        
-
         <button className="button">Contact</button>
       </div>
     </div>

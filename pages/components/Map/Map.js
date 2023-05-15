@@ -22,6 +22,10 @@ const onlineDriver = L.icon({
  
 const position = [ 23.76327225,90.35982402380321];
 
+function handleKnowMore(){
+  console.log("handle know more function clicked");
+}
+
 
 function ShowOnlineUsers({activeDrivers}) {
   const map = useMap();
@@ -34,20 +38,28 @@ function ShowOnlineUsers({activeDrivers}) {
         const marker = L.marker([latitude, longitude],  {icon :onlineDriver}).addTo(map);
 
 
-        const handleKnowMore = () => {
-          // Handle the "Know More" button click event
-          console.log(`Know More button clicked for user ${username}`);
-          // Add your custom logic here
-        };
+        // const handleKnowMore = () => {
+        //   // Handle the "Know More" button click event
+        //   console.log(`Know More button clicked for user ${username}`);
+        //   // Add your custom logic here
+        // };
 
         const popupContent = `
           <b>${username}</b><br>${rating}<br>${des}<br>
+          <button
+              type="button"
+              className="custom__button"
+              onClick={() => {
+                // Your click logic here
+                console.log('Button clicked!');
+              }}
+            >
+              Book for Later
+          </button>
           <button onclick="handleKnowMore()">Know More</button>
         `;
 
-        marker.bindPopup(popupContent).on('click', () => {
-          handleKnowMore(); // Call the handleKnowMore function when the popup is clicked
-        });
+        marker.bindPopup(popupContent);
   
         marker.openPopup();
         // marker.bindPopup(`<b>${username}</b><br>${rating}<br>${des}`).openPopup();

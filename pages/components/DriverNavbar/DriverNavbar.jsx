@@ -53,13 +53,6 @@ const Navbar = () => {
 
         <div />
 
-        <Menu>
-        <MenuButton>Open menu</MenuButton>
-        <MenuList>
-          <MenuItem as='a' href='#'>Link 1</MenuItem>
-          <MenuItem as='a' href='#'>Link 2</MenuItem>
-        </MenuList>
-      </Menu>
     
         <Menu>
           <MenuButton as={Button}>
