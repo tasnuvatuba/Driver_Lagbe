@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     /* change color if want to */
-    background: var(--color-grey);
+    background: #414141;
 
     padding: 1rem 2rem;
 }

@@ -1,6 +1,6 @@
 .app__aboutus {
     position: relative;
-    background: var(--color-grey);
+    background: #414141;
 }
 
 .app__aboutus-overlay {
