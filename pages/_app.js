@@ -1,4 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
+import { useRouter } from 'next/router';
+import { useEffect } from 'react'
+// import '@/styles/globals.css'
 import { SSRProvider } from '@chakra-ui/react';
 
 //import '@/styles/globals.css'

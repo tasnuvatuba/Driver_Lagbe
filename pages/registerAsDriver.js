@@ -17,12 +17,23 @@ import {
   } from '@chakra-ui/react';
   import { RadioGroup } from "@chakra-ui/react";
   import { Radio } from "@chakra-ui/react";
-  import { useState } from 'react';
+  import { useEffect, useState } from 'react';
   import axios from "axios";
   import { useRouter } from 'next/router';
+import Services from './Services';
 import { colors } from './constants/colors';
   
   export default function SignupCard() {
+    const [header, setHeader] = useState('');
+    const [nameLabel, setNameLabel] = useState('');
+    const [usernameLabel, setUsernameLabel] = useState('');
+    const [dobLabel, setDOBLabel] = useState('');
+    const [genderLabel, setGenderLabel] = useState('');
+    const [NIDLabel, setNIDLabel] = useState('');
+    const [drivingIdLabel, setDrivingIDLabel] = useState('');
+
+
+
     const [registerUsername, setRegisterUsername] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
 
@@ -38,9 +49,123 @@ import { colors } from './constants/colors';
 
     const toast = useToast();
     const router = useRouter();
+
+
+    const [purpose, setPurpose] = useState("");
+    const [driverProfile, setDriverProfile] = useState([])
+  
+    useEffect(() => {
+      const queryParams = new URLSearchParams(window.location.search);
+      const purpose = queryParams.get('purpose');
+      
+
+      // Use the sourcePage value in your logic
+      console.log('purpose:', purpose);
+      setPurpose(purpose)
+
+      if(purpose === null){
+        //fetch data from database
+        console.log("inside check");
+        setPurpose("register");
+        console.log(purpose);
+      }
+
+      setHeader("Register as a Driver");
+      setNameLabel("Full Name");
+      setUsernameLabel("Username (Please choose a unique username)");
+      setDOBLabel("Date of Birth");
+      setGenderLabel("Gender");
+      setNIDLabel("NID Number");
+      setDrivingIDLabel("Driving Licence ID Number");
     
+      const fetchDriverProfile = async () => {
+        const username = localStorage.getItem('username');
+        const services = new Services();
+        const profileData = await services.getDriverProfile(username);
+        setDriverProfile(profileData[0]);
+        console.log(profileData[0])
+
+        setHeader("Edit Profile");
+        setNameLabel("Full Name: " + profileData[0].name);
+        setUsernameLabel("Username: " + profileData[0].username);
+        setDOBLabel("Date of Birth: " + profileData[0].DOB);
+        setGenderLabel("Gender: " + profileData[0].gender);
+        setNIDLabel("NID Number: " + profileData[0].nId);
+        setDrivingIDLabel("Driving License Number: " + profileData[0].drivingId);
+
+      };
+
     
 
+      if(purpose === 'editProfile' && driverProfile){
+        //fetch data from database
+        fetchDriverProfile();
+      }
+    
+    }, []);
+
+    const saveToDatabase = () => {
+
+      if(registerExperience.length>0 &&registerPhoneNo.length>0 && regsiterLocation.length>0 && registerFare.length>0 ){
+        //save to database
+        const services = new Services();
+        const username = localStorage.getItem('username');
+        const response = services.updateDriverProfile(username, registerExperience, registerPhoneNo, regsiterLocation, registerFare);
+
+        if(response === "Failed to update profile" || response === "Error updating profile"){
+          toast({
+            title: 'Error',
+            description: response,
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+    
+        else {
+          toast({
+            title: 'Success',
+            description: response,
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          });
+    
+      }
+    }
+      else{
+        toast({
+          title: 'Error',
+          description: 'Please fill in all the fields',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
+        
+      }
+    };
+
+    const isFieldVisible = (purpose) => {
+      switch (purpose) {
+        case 'editProfile':
+          return false; // All fields are visible for editing the profile
+        case 'register':
+          return true; // All fields are visible for registration
+        default:
+          return true; // Default to making all fields visible
+      }
+    };
+
+    const getFields = () => {
+      console.log("edit profile")
+
+      document.getElementById('experience').placeholder = driverProfile.experience;
+      document.getElementById('fare').placeholder = driverProfile.fare;
+      document.getElementById('phone').placeholder = driverProfile.phone;
+      document.getElementById('location').placeholder = driverProfile.address;
+
+    };
+    
     const register = () => {
 
         //check if all input are filled
@@ -156,12 +281,8 @@ import { colors } from './constants/colors';
           });
         }
 
-
-    }
-
-
-
-
+    };
+    
   
     return (
       <Flex
@@ -172,7 +293,7 @@ import { colors } from './constants/colors';
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
           <Stack align={'center'}>
             <Heading fontSize={'4xl'} textAlign={'center'}>
-              Register as a Driver
+              {header}
             </Heading>
           </Stack>
           <Box
@@ -182,38 +303,46 @@ import { colors } from './constants/colors';
             p={8}>
             <Stack spacing={4}>
               <FormControl id="fullName" isRequired>
-                <FormLabel>Full Name</FormLabel>
-                <Input type="text" onChange={e => setRegisterName(e.target.value)}/>
+                <FormLabel>{nameLabel}</FormLabel>
+                {isFieldVisible(purpose) && <Input type="text" onChange={e => setRegisterName(e.target.value)} />}
+                {/* <Input type="text" onChange={e => setRegisterName(e.target.value)}/> */}
               </FormControl>
               <FormControl id="username" isRequired>
-                <FormLabel>Username (Please choose a unique username)</FormLabel>
+                <FormLabel>{usernameLabel}</FormLabel>
+                {isFieldVisible(purpose) && 
                 <Input type="text" onChange={e => setRegisterUsername(e.target.value)}/>
+                }
               </FormControl>
-              <FormControl id="password" isRequired>
+              {purpose !== 'editProfile' &&
+              (<FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
                 <Input type={registerPassword ? 'text' : 'password'} onChange={e => setRegisterPassword(e.target.value)}/>
-              </FormControl>
+              </FormControl>)}
               <FormControl id="dob" isRequired>
-                <FormLabel>Date of Birth</FormLabel>
-                <Input type="date" onChange={e => setRegisterDoB(e.target.value)}/>
+                <FormLabel>{dobLabel}</FormLabel>
+                {isFieldVisible(purpose) && 
+                <Input type="date" onChange={e => setRegisterDoB(e.target.value)}/> }
               </FormControl>
               <FormControl id="gender" isRequired>
-                <FormLabel>Gender</FormLabel>
+                <FormLabel>{genderLabel}</FormLabel>
+                {isFieldVisible(purpose) && 
                 <RadioGroup onChange={setRegisterGender} value={registerGender}>
                   <Stack direction='row'>
                     <Radio value='male'>Male</Radio>
                     <Radio value='female'>Female</Radio>
                     <Radio value='others'>Others</Radio>
                   </Stack>
-                </RadioGroup>
+                </RadioGroup> }
               </FormControl>
               <FormControl id="nId" isRequired>
-                <FormLabel>NID Number</FormLabel>
-                <Input type="number" onChange={e => setRegisterNID(e.target.value)}/>
+                <FormLabel>{NIDLabel}</FormLabel>
+                {isFieldVisible(purpose) && 
+                <Input type="number" onChange={e => setRegisterNID(e.target.value)}/> }
               </FormControl>
               <FormControl id="drivingId" isRequired>
-                <FormLabel>Driving Licence ID Number</FormLabel>
-                <Input type="number" onChange={e => setRegisterDrivingID(e.target.value)}/>
+                <FormLabel>{drivingIdLabel}</FormLabel>
+                {isFieldVisible(purpose) && 
+                <Input type="number" onChange={e => setRegisterDrivingID(e.target.value)}/> }
               </FormControl>
               <FormControl id="location" isRequired>
                 <FormLabel>Area of Living (Please be specific)</FormLabel>
@@ -232,24 +361,50 @@ import { colors } from './constants/colors';
                 <Input type="number" onChange={e => setRegisterPhoneNo(e.target.value)}/>
               </FormControl>
               
-              <Stack spacing={10} pt={2}>
-                <Button
-                  onClick={register}
-                  loadingText="Submitting"
-                  size="lg"
-                  bg={colors.bt_light}
-                  color={'white'}
-                  _hover={{
-                    bg: colors.bt_dark
-                  }}>
-                  Register
-                </Button>
-              </Stack>
-              <Stack pt={6}>
-                <Text align={'center'}>
-                  Already a user? <Link href="/login" color={colors.bt_dark} fontWeight="bold">Login</Link>
-                </Text>
-              </Stack>
+              {purpose !== 'editProfile' &&
+                (<Stack spacing={10} pt={2}>
+                  <Button
+                    onClick={register}
+                    loadingText="Submitting"
+                    size="lg"
+                    bg={'blue.400'}
+                    color={'white'}
+                    _hover={{
+                      bg: 'blue.500',
+                    }}>
+                    Register
+                  </Button>
+                </Stack>
+                )
+              }
+              
+              {purpose !== 'editProfile' &&
+                (
+                <Stack pt={6}>
+                  <Text align={'center'}>
+                    Already a user? <Link href="/login" color={'blue.400'}>Login</Link>
+                  </Text>
+                </Stack>
+                )
+              }
+              
+              {purpose === 'editProfile' && getFields()}
+              {purpose === 'editProfile' &&
+                (<Stack spacing={10} pt={2}>
+                  <Button
+                    onClick={saveToDatabase}
+                    loadingText="Submitting"
+                    size="lg"
+                    bg={'blue.400'}
+                    color={'white'}
+                    _hover={{
+                      bg: 'blue.500',
+                    }}>
+                    Save Profile Update
+                  </Button>
+                </Stack>
+                )
+              }
             </Stack>
           </Box>
         </Stack>

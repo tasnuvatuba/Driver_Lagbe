@@ -17,12 +17,21 @@ import {
   } from '@chakra-ui/react';
   import { RadioGroup } from "@chakra-ui/react";
   import { Radio } from "@chakra-ui/react";
-  import { useState } from 'react';
+  import { useEffect, useState } from 'react';
   import axios from "axios";
   import { useRouter } from 'next/router';
+import Services from './Services';
 import { colors } from './constants/colors';
   
   export default function SignupCard() {
+    const [header, setHeader] = useState('');
+    const [nameLabel, setNameLabel] = useState('');
+    const [usernameLabel, setUsernameLabel] = useState('');
+    const [dobLabel, setDOBLabel] = useState('');
+    const [genderLabel, setGenderLabel] = useState('');
+    const [NIDLabel, setNIDLabel] = useState('');
+   
+
     const [registerUsername, setRegisterUsername] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
 
@@ -35,6 +44,120 @@ import { colors } from './constants/colors';
     
     const toast = useToast();
     const router = useRouter();
+
+
+    const [purpose, setPurpose] = useState("");
+    const [ownerProfile, setOwnerProfile] = useState([])
+  
+    useEffect(() => {
+      const queryParams = new URLSearchParams(window.location.search);
+      const purpose = queryParams.get('purpose');
+      
+
+      // Use the sourcePage value in your logic
+      console.log('purpose:', purpose);
+      setPurpose(purpose)
+
+      if(purpose === null){
+        //fetch data from database
+        console.log("inside check");
+        setPurpose("register");
+        console.log(purpose);
+      }
+
+      setHeader("Register as a Owner");
+      setNameLabel("Full Name");
+      setUsernameLabel("Username (Please choose a unique username)");
+      setDOBLabel("Date of Birth");
+      setGenderLabel("Gender");
+      setNIDLabel("NID Number");
+
+    
+      const fetchOwnerProfile = async () => {
+        const username = localStorage.getItem('username');
+        const services = new Services();
+        const profileData = await services.getOwnerProfile(username);
+        setOwnerProfile(profileData[0]);
+        console.log(profileData[0])
+
+        setHeader("Edit Profile");
+        setNameLabel("Full Name: " + profileData[0].name);
+        setUsernameLabel("Username: " + profileData[0].username);
+        setDOBLabel("Date of Birth: " + profileData[0].dob);
+        setGenderLabel("Gender: " + profileData[0].gender);
+        setNIDLabel("NID Number: " + profileData[0].nId);
+
+      };
+
+    
+
+      if(purpose === 'editProfile' && ownerProfile){
+        //fetch data from database
+        fetchOwnerProfile();
+      }
+    
+    }, []);
+
+
+    const saveToDatabase = () => {
+
+      if(registerPhoneNo.length>0 && regsiterLocation.length>0 ){
+        //save to database
+        const services = new Services();
+        const username = localStorage.getItem('username');
+        const response = services.updateOwnerProfile(username, registerPhoneNo, regsiterLocation);
+
+        if(response === "Failed to update profile" || response === "Error updating profile"){
+          toast({
+            title: 'Error',
+            description: response,
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+    
+        else {
+          toast({
+            title: 'Success',
+            description: response,
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          });
+    
+      }
+    }
+      else{
+        toast({
+          title: 'Error',
+          description: 'Please fill in all the fields',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
+        
+      }
+    };
+
+    const isFieldVisible = (purpose) => {
+      switch (purpose) {
+        case 'editProfile':
+          return false; // All fields are not visible for editing the profile
+        case 'register':
+          return true; // All fields are visible for registration
+        default:
+          return true; // Default to making all fields visible
+      }
+    };
+
+    const getFields = () => {
+      console.log("edit profile")
+
+      document.getElementById('phone').placeholder = ownerProfile.phone;
+      document.getElementById('location').placeholder = ownerProfile.address;
+
+    };
     
 
     const register = () => {
@@ -144,7 +267,7 @@ import { colors } from './constants/colors';
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
           <Stack align={'center'}>
             <Heading fontSize={'4xl'} textAlign={'center'}>
-              Register as a Car Owner
+              {header}
             </Heading>
           </Stack>
           <Box
@@ -154,36 +277,43 @@ import { colors } from './constants/colors';
             p={8}>
             <Stack spacing={4}>
               <FormControl id="fullName" isRequired>
-                <FormLabel>Full Name</FormLabel>
-                <Input type="text" onChange={e => setRegisterName(e.target.value)}/>
+                <FormLabel>{nameLabel}</FormLabel>
+                {isFieldVisible(purpose) && 
+                <Input type="text" onChange={e => setRegisterName(e.target.value)}/> }
               </FormControl>
               <FormControl id="username" isRequired>
                 {console.log('Username: ', registerUsername)}
-                <FormLabel>Username (Please choose a unique username)</FormLabel>
-                <Input type="text" onChange={e => setRegisterUsername(e.target.value)}/>
+                <FormLabel>{usernameLabel}</FormLabel>
+                {isFieldVisible(purpose) && 
+                <Input type="text" onChange={e => setRegisterUsername(e.target.value)}/> }
               </FormControl>
+              {isFieldVisible(purpose) && 
               <FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
-                <Input type={registerPassword ? 'text' : 'password'} onChange={e => setRegisterPassword(e.target.value)}/>
-              </FormControl>
+                
+                <Input type={registerPassword ? 'text' : 'password'} onChange={e => setRegisterPassword(e.target.value)}/> 
+              </FormControl> }
               <FormControl id="dob" isRequired>
-                <FormLabel>Date of Birth</FormLabel>
-                <Input type="date" onChange={e => setRegisterDoB(e.target.value)}/>
+                <FormLabel>{dobLabel}</FormLabel>
+                {isFieldVisible(purpose) && 
+                <Input type="date" onChange={e => setRegisterDoB(e.target.value)}/> }
               </FormControl>
               <FormControl id="gender" isRequired>
-                <FormLabel>Gender</FormLabel>
+                <FormLabel>{genderLabel}</FormLabel>
+                {isFieldVisible(purpose) && 
                 <RadioGroup onChange={setRegisterGender} value={registerGender}>
                   <Stack direction='row'>
                     <Radio value='male'>Male</Radio>
                     <Radio value='female'>Female</Radio>
                     <Radio value='others'>Others</Radio>
                   </Stack>
-                </RadioGroup>
+                </RadioGroup> }
               </FormControl>
               
               <FormControl id="nId" isRequired>
-                <FormLabel>NID Number</FormLabel>
-                <Input type="number" onChange={e => setRegisterNID(e.target.value)}/>
+                <FormLabel>{NIDLabel}</FormLabel>
+                {isFieldVisible(purpose) && 
+                <Input type="number" onChange={e => setRegisterNID(e.target.value)}/> }
               </FormControl>
               <FormControl id="location" isRequired>
                 <FormLabel>Area of Living (Please be specific)</FormLabel>
@@ -194,6 +324,7 @@ import { colors } from './constants/colors';
                 <Input type="number" onChange={e => setRegisterPhoneNo(e.target.value)}/>
               </FormControl>
               
+              { isFieldVisible(purpose) && 
               <Stack spacing={10} pt={2}>
                 <Button
                   onClick={register}
@@ -207,11 +338,32 @@ import { colors } from './constants/colors';
                   Register
                 </Button>
               </Stack>
+              }
+              
+              {isFieldVisible(purpose) && 
               <Stack pt={6}>
                 <Text align={'center'}>
                   Already a user? <Link href="/login" color={colors.bt_dark} fontWeight="bold">Login</Link>
                 </Text>
-              </Stack>
+              </Stack> }
+
+              {purpose === 'editProfile' && getFields()}
+              {purpose === 'editProfile' &&
+                (<Stack spacing={10} pt={2}>
+                  <Button
+                    onClick={saveToDatabase}
+                    loadingText="Submitting"
+                    size="lg"
+                    bg={'blue.400'}
+                    color={'white'}
+                    _hover={{
+                      bg: 'blue.500',
+                    }}>
+                    Save Profile Update
+                  </Button>
+                </Stack>
+                )
+              }
             </Stack>
           </Box>
         </Stack>
