@@ -22,10 +22,7 @@ import { StarIcon } from "@chakra-ui/icons";
 
 export default function Profile() {
   const router = useRouter()
-  const { driverUsername, srcPage, srcAddr, destAddr, tripType, ownerUsername} = router.query
-  const source = srcAddr;
-  const destination = destAddr;
-  const typeOfTrip = tripType;
+  const { driverUsername, srcPage, srcAddr, destAddr, tripType, ownerUsername} = router.query;
 
   console.log(driverUsername, srcPage, srcAddr, destAddr, tripType, ownerUsername);
 
@@ -96,7 +93,7 @@ export default function Profile() {
 
 
 
-
+  console.log(driverProfile.username, driverProfile.name, driverProfile.phone);
   return (
     <Box padding="4" borderWidth="0px" borderRadius="lg">
       <Box textAlign="center" marginTop="4" borderWidth="5px" borderRadius="lg">
