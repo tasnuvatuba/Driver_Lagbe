@@ -376,12 +376,12 @@ import { colors } from './constants/colors';
                   <Button
                     onClick={register}
                     loadingText="Submitting"
-                    size="lg"
-                    bg={'blue.400'}
-                    color={'white'}
-                    _hover={{
-                      bg: 'blue.500',
-                    }}>
+                  size="lg"
+                  bg={colors.bt_light}
+                  color={'white'}
+                  _hover={{
+                    bg: colors.bt_dark
+                  }}>
                     Register
                   </Button>
                 </Stack>
@@ -404,12 +404,12 @@ import { colors } from './constants/colors';
                   <Button
                     onClick={saveToDatabase}
                     loadingText="Submitting"
-                    size="lg"
-                    bg={'blue.400'}
-                    color={'white'}
-                    _hover={{
-                      bg: 'blue.500',
-                    }}>
+                  size="lg"
+                  bg={colors.bt_light}
+                  color={'white'}
+                  _hover={{
+                    bg: colors.bt_dark
+                  }}>
                     Save Profile Update
                   </Button>
                 </Stack>

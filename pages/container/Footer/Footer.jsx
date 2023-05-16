@@ -22,7 +22,7 @@ const Footer = () => (
           <FiFacebook />
           <FiTwitter />
           <FiInstagram />
-        </div> */}
+        </div> 
       </div>
 
       <div className="app__footer-links_work">
