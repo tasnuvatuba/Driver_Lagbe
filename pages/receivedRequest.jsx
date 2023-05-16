@@ -3,6 +3,7 @@ import axios from "axios";
 import { SimpleGrid } from "@chakra-ui/react";
 import ReceivedReqCard from "./components/receivedReqCard";
 import { useRouter } from 'next/router';
+import '/sentRequests.css'
 
 
 export default function sentRequest() {
@@ -44,6 +45,9 @@ export default function sentRequest() {
 
   return (
     <div style={{ marginTop: '50px' , marginLeft: '30px', marginRight: '30px'}}>
+      <header className="header">
+          <h1>Available Drivers</h1>
+        </header>
         <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} spacing={10}>
       {requests.map((request) => (
         <ReceivedReqCard key={request.id} request={request} />

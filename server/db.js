@@ -5,8 +5,8 @@ var db = mysql.createPool({
     connectionLimit: 10,
     host: "localhost",
     user: "root",
-    password: "tuba",
-    database: "signupSignin"
+    password: "Fabiha1999!",
+    database: "driver_lagbe"
 });
 
 db.getConnection(function(err, connection) {

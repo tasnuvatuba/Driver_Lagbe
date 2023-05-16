@@ -1,7 +1,7 @@
 .app__booking {
     padding: 2rem 4rem;
     border: 1px solid var(--color-white);
-    background: var(--color-grey);
+    background: #414141;
 }
 
 .app__booking-heading {

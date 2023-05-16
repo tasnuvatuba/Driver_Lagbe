@@ -19,7 +19,9 @@ const SpecialMenu = () => (
           ))}
         </div>
       </div>
+        <div className='gap'>
 
+        </div>
 
       <div className="app__specialMenu-menu_cocktails  flex__center">
         {/* <p className="app__specialMenu-menu_heading">Cocktails</p> */}

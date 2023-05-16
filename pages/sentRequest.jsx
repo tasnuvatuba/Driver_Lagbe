@@ -5,6 +5,7 @@ import RequestCard from "./components/RequestCard";
 import { useRouter } from 'next/router';
 import { OwnerNavbar } from './components';
 import { Header } from "./container";
+import '/sentRequests.css'
 
 export default function sentRequest() {
   const [requests, setRequests] = useState([]);
@@ -46,6 +47,9 @@ export default function sentRequest() {
   return (
     <div>
         <div style={{ marginTop: '50px' , marginLeft: '30px', marginRight: '30px'}}>
+        <header className="header">
+          <h1>Available Drivers</h1>
+        </header>
             <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} spacing={10}>
                 {requests.map((request) => (
                     <RequestCard key={request.id} request={request} />
