@@ -163,13 +163,14 @@ app.post('/getActiveDrivers', (req, res) => {
 
 
 app.post('/getDriverProfile', (req, res) => {
-  const query = "SELECT * FROM driver_account where username = ?";
+  const query = "SELECT * FROM driver_info where username = ?";
     db.query(query, [req.body.username], async (err, rows) =>{
       if(err)
       {
         res.send("no driver profile");
       }
       else{ //compare pass
+        console.log(rows[0].username, rows[0].name);
         res.send(rows)
       }
     })
@@ -214,7 +215,7 @@ app.post('/updateStatus', (req, res) => {
 
 app.post('/updateDriverProfile', (req, res) => {
   const {username, experience, phone, location, fare } = req.body;
-  const query = 'UPDATE driver_info SET experience = ?, phone = ?, address = ?, fare = ?  WHERE username = ?';
+  const query = 'UPDATE driver_info SET experience = ?, phone = ?, location = ?, fare = ?  WHERE username = ?';
   const params = [experience, phone, location, fare, username];
 
   db.query(query, params, (error, result) => {
@@ -236,7 +237,7 @@ app.post('/updateDriverProfile', (req, res) => {
 
 app.post('/updateOwnerProfile', (req, res) => {
   const {username, phone, location} = req.body;
-  const query = 'UPDATE owner_info SET  phone = ?, address = ? WHERE username = ?';
+  const query = 'UPDATE owner_info SET  phone = ?, location = ? WHERE username = ?';
   const params = [phone, location, username];
 
   db.query(query, params, (error, result) => {
@@ -255,47 +256,47 @@ app.post('/updateOwnerProfile', (req, res) => {
 });
 
 
-app.post('/updateDriverProfile', (req, res) => {
-  const {username, experience, phone, location, fare } = req.body;
-  const query = 'UPDATE driver_info SET experience = ?, phone = ?, address = ?, fare = ?  WHERE username = ?';
-  const params = [experience, phone, location, fare, username];
+// app.post('/updateDriverProfile', (req, res) => {
+//   const {username, experience, phone, location, fare } = req.body;
+//   const query = 'UPDATE driver_info SET experience = ?, phone = ?, address = ?, fare = ?  WHERE username = ?';
+//   const params = [experience, phone, location, fare, username];
 
-  db.query(query, params, (error, result) => {
-    if (error) {
-      console.error('Error updating profile:', error);
-      res.status(500).json({ error: 'Failed to update profile' });
-      res.send("Failed to update profile");
-      return
-    }
+//   db.query(query, params, (error, result) => {
+//     if (error) {
+//       console.error('Error updating profile:', error);
+//       res.status(500).json({ error: 'Failed to update profile' });
+//       res.send("Failed to update profile");
+//       return
+//     }
 
-    else{
-      console.log('Profile updated successfully!');
-      // res.status(200).json({ message: 'Status updated successfully' });
-      res.send("Profile updated successfully")
-    }
-  });
-});
+//     else{
+//       console.log('Profile updated successfully!');
+//       // res.status(200).json({ message: 'Status updated successfully' });
+//       res.send("Profile updated successfully")
+//     }
+//   });
+// });
 
 
-app.post('/updateOwnerProfile', (req, res) => {
-  const {username, phone, location} = req.body;
-  const query = 'UPDATE owner_info SET  phone = ?, address = ? WHERE username = ?';
-  const params = [phone, location, username];
+// app.post('/updateOwnerProfile', (req, res) => {
+//   const {username, phone, location} = req.body;
+//   const query = 'UPDATE owner_info SET  phone = ?, address = ? WHERE username = ?';
+//   const params = [phone, location, username];
 
-  db.query(query, params, (error, result) => {
-    if (error) {
-      console.error('Error updating profile:', error);
-      res.status(500).json({ error: 'Failed to update profile' });
-      res.send("Failed to update profile");
-    }
+//   db.query(query, params, (error, result) => {
+//     if (error) {
+//       console.error('Error updating profile:', error);
+//       res.status(500).json({ error: 'Failed to update profile' });
+//       res.send("Failed to update profile");
+//     }
 
-    else{
-      console.log('Profile updated successfully!');
-      // res.status(200).json({ message: 'Status updated successfully' });
-      res.send("Profile updated successfully")
-    }
-  });
-});
+//     else{
+//       console.log('Profile updated successfully!');
+//       // res.status(200).json({ message: 'Status updated successfully' });
+//       res.send("Profile updated successfully")
+//     }
+//   });
+// });
 
 
 //////////////////////////////
@@ -320,9 +321,9 @@ app.post('/driverProfile', (req, res) => {
 
 app.post('/sendRequest', (req, res) => {
   
-  const query = "INSERT INTO request (driver, owner, source, destination, typeOfTrip, time, status) VALUES (?,?,?,?,?,?,?)";
+  const query = "INSERT INTO request (driver, owner, source, destination, typeOfTrip, time, status, pickUpTime) VALUES (?,?,?,?,?,?,?,?)";
 
-    db.query(query, [req.body.driverUsername, req.body.ownerUsername, req.body.source, req.body.destination, req.body.typeOfTrip, req.body.time, req.body.status] ,async (err, rows) => {
+    db.query(query, [req.body.driverUsername, req.body.ownerUsername, req.body.source, req.body.destination, req.body.typeOfTrip, req.body.time, req.body.status, req.body.pickUpTime] ,async (err, rows) => {
       if (err) {
         console.log(err);
         res.send("error");

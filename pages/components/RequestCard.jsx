@@ -10,6 +10,7 @@ export default function RequestCard({ request }) {
   const [statusCol, setStatusCol] = useState("black");
   const [showButton, setShowButton] = useState(false); //false = no show button, true = show button
   const [fixedButton, setFixedButton] = useState(true); //false = not fixed, true = fixed
+  const [preeBooking, setPreBooking] = useState(false); 
 
   useEffect(() => {
     if(request.status === "accepted"){
@@ -18,6 +19,10 @@ export default function RequestCard({ request }) {
     }
     else if(request.status ===  "declined"){
       setStatusCol("red.500");
+    }
+    /////////
+    if(request.pickUpTime !== null){
+      setPreBooking(true);
     }
 
     ////////////
@@ -109,6 +114,11 @@ export default function RequestCard({ request }) {
       
       <Box p="6">
         <Box d="flex" alignItems="baseline">
+          {preeBooking && <Text fontSize="xl" mr="2">
+            Pre Booking for: {request.pickUpTime}
+          </Text>
+          }
+
           <Text fontSize="xl" mr="2">
             Driver's Username: {request.driver}
           </Text>

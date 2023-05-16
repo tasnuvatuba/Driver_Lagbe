@@ -9,6 +9,7 @@ export default function ReceivedReqCard({ request }) {
   const toast = useToast();
   const [showButton, setShowButton] = useState(true);
   const [statusCol, setStatusCol] = useState("black");
+  const [preeBooking, setPreBooking] = useState(false); 
   
 
 useEffect(() => {
@@ -25,6 +26,12 @@ useEffect(() => {
       setStatusCol("red.500");
 
     }
+
+     /////////
+     if(request.pickUpTime !== null){
+      setPreBooking(true);
+    }
+
     
   }, []); // empty dependency array to run effect only once on mount
 
@@ -106,6 +113,10 @@ useEffect(() => {
       
       <Box p="6">
         <Box d="flex" alignItems="baseline">
+          {preeBooking && <Text fontSize="xl" mr="2">
+            Pre Booking for: {request.pickUpTime}
+          </Text>
+          }
           <Text fontSize="xl" mr="2">
             Car Owner's Username: {request.owner}
           </Text>

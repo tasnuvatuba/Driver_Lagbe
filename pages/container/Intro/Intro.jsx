@@ -42,7 +42,7 @@ const Newsletter = ({username}) => {
 
     router.push({
       pathname: '/AvailableDriver',
-      query: { username: username, srcPage: 'Intro', srcAddr: sourceAddress, destAddr: destinationAddress, tripType: tripType }
+      query: { username: username, srcPage: 'Intro', srcAddr: sourceAddress, destAddr: destinationAddress, tripType: tripType } //no pickup time??
     })
   };
 
@@ -65,7 +65,7 @@ const Newsletter = ({username}) => {
 
     router.push({
       pathname: '/AllDrivers',
-      query: { sourcePage: 'Intro', srcAddr: sourceAddress, destAddr: destinationAddress, tripType: tripType, 
+      query: { username: username, sourcePage: 'Intro', srcAddr: sourceAddress, destAddr: destinationAddress, tripType: tripType, 
       pickUpTime:pickUpTime }
     })
   

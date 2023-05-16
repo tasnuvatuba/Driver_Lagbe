@@ -5,20 +5,26 @@ import './AllDrivers.css';
 import { Radio, RadioGroup, Stack, Button} from '@chakra-ui/react';
 import Head from 'next/head';
 
+import { useRouter } from 'next/router';
+
 
 
 export default function AvailableDriver() {
+  
+  const router = useRouter();
+  const { username, srcPage, srcAddr, destAddr, tripType, pickUpTime } = router.query;
+
+  console.log(srcPage, srcAddr, destAddr, tripType, pickUpTime);
+
   const [allDrivers, setAllDrivers] = useState([]);
   const [sortingOption, setSortingOption] = useState('rating'); // Default sorting option
   const [sourcePage, setSourcePage] = useState("");
+
   
-
-
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const sourcePage = queryParams.get('sourcePage');
     
-
     // Use the sourcePage value in your logic
     console.log('sourcePage:', sourcePage);
     setSourcePage(sourcePage)
@@ -83,6 +89,12 @@ export default function AvailableDriver() {
               fare={user.fare}
               status={user.status}
               source = {sourcePage}
+
+              srcAddr={srcAddr}
+              destAddr={destAddr}
+              tripType={tripType}
+              username = {username} //owner username
+              pickUpTime = {pickUpTime}
             />
           ))}
         </div>

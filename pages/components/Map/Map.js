@@ -39,7 +39,7 @@ function ShowOnlineUsers({activeDrivers}) {
 
         const popupContent = `
           <b>Name : ${username}</b><br>Rating: ${rating}<br>Fare: ${fare}<br>
-          <a href="/Profile?username=${username}"><h1> Know More </h1></a>
+          <a href="/Profile?driverUsername=${username}"><h1> Know More </h1></a>
         `;
 
 

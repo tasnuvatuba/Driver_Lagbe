@@ -15,7 +15,7 @@ import Link from 'next/link';
 library.add(fasStar, farStar, fasStarHalfAlt);
 
 
-const ProfileCard = ({img, name, desc, rating, fare, status, source, srcPage, srcAddr, destAddr, tripType, username}) => { //name-> driver username, username -> owner username
+const ProfileCard = ({img, name, desc, rating, fare, status, source, srcPage, srcAddr, destAddr, tripType, username, pickUpTime}) => { //name-> driver username, username -> owner username
   
   const [isClicked, setIsClicked] = useState(false);
   const toast = useToast();
@@ -91,7 +91,8 @@ const ProfileCard = ({img, name, desc, rating, fare, status, source, srcPage, sr
               destination: destAddr,
               typeOfTrip: tripType,
               time: time,
-              status: "pending"
+              status: "pending",
+              pickUpTime: pickUpTime
 
             },
             url: 'http://localhost:3001/sendRequest'
