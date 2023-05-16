@@ -21,11 +21,6 @@ const serviceitemleft = [
    
     tags: 'Book a driver for daily office commutes, mid-day shopping, night-outs, airport transfers, or weekend getaways with our hourly packages.',
   },
-  {
-    title: 'Daily commute to work',
-    
-    tags: 'What better than resting out, reading or catching up on work during the transit time instead of facing the stressful city traffic? Our chauffeurs will help you reach your workplace safe and sound, ready to be work-bound! From daily office commute to a quick ride to the printer in the middle of the day, we’re always there to drive you',
-  },
 ];
 
 const serviceitemright = [
@@ -38,16 +33,9 @@ const serviceitemright = [
     tags: 'All cities have a vibe of their own, and while you travel within one, it is always great to have someone who knows the city well, driving you around to help you experience the most authentic form of life, places, food and people in the city. Let us drive you as your professional driver and touring guide to explore the best of the city.',
   },
   {
-    title: 'Daiquiri',
-    tags: 'Rum | Citrus juice | Sugar',
-  },
-  {
-    title: 'Old Fashioned',
-    tags: 'Bourbon | Brown sugar | Angostura Bitters',
-  },
-  {
-    title: 'Negroni',
-    tags: 'Gin | Sweet Vermouth | Campari | Orange garnish',
+    title: 'Daily commute to work',
+    
+    tags: 'What better than resting out, reading or catching up on work during the transit time instead of facing the stressful city traffic? Our chauffeurs will help you reach your workplace safe and sound, ready to be work-bound! From daily office commute to a quick ride to the printer in the middle of the day, we’re always there to drive you',
   },
 ];
 

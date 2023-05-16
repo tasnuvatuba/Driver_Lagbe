@@ -74,7 +74,7 @@ const Newsletter = ({username}) => {
   
   return (
     
-    <div className="app__booking">
+    <div className="app__booking" id = "booking">
       <div className="app__booking-heading">
         <h1 className="headtext__cormorant">Start Your Journey</h1>
       </div>

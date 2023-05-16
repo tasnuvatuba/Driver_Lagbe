@@ -116,6 +116,15 @@ import { colors } from './constants/colors';
             isClosable: true,
           });
         }
+        else if(response === "Error updating profile"){
+          toast({
+            title: 'Error',
+            description: response,
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+        }
     
         else {
           toast({

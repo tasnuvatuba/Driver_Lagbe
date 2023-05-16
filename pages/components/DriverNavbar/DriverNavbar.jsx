@@ -33,6 +33,8 @@ const Navbar = ({username}) => {
       smallWindow.resizeTo(900, 700);
     }
   };
+
+
   const [toggleMenu, setToggleMenu] = React.useState(false);
 
   const handleLogout = () => {
@@ -42,6 +44,12 @@ const Navbar = ({username}) => {
     localStorage.removeItem('status');
     localStorage.setItem('role', 'guest');
     router.push('/');
+    // Add your logout logic, such as clearing local storage, redirecting, etc.
+  };
+
+  const openEditProfile = () => {
+    // Perform logout actions here
+    router.push('/registerAsDriver?purpose=editProfile');
     // Add your logout logic, such as clearing local storage, redirecting, etc.
   };
 
@@ -72,17 +80,16 @@ const Navbar = ({username}) => {
 
         <div />
 
-    
+
         <Menu>
           <MenuButton as={Button}>
-            Actions
+            What you can do
           </MenuButton>
           <MenuList>
             <MenuItem onClick={openSmallWindow}>Status Update</MenuItem>
             <MenuItem><Link href={{ pathname: '../receivedRequest', query: { username } }}><a>Received Requests</a></Link></MenuItem>
             <MenuItem>All Drivers</MenuItem>
-            <MenuItem>Edit Profile</MenuItem>
-            <MenuDivider />
+            <MenuItem onClick={openEditProfile}> Edit Profile</MenuItem>
             <MenuItem onClick={handleLogout}>Log Out</MenuItem>
             
           </MenuList>
@@ -94,9 +101,9 @@ const Navbar = ({username}) => {
           <div className="app__drivernavbar-smallscreen_overlay flex__center slide-bottom">
             <AiFillCar fontSize={27} className="overlay__close" onClick={() => setToggleMenu(false)} />
             <ul className="app__drivernavbar-smallscreen_links">
-              <li className="p__opensans"><a href="#home" onClick={() => setToggleMenu(false)}>Status Update</a></li>
+              <li className="p__opensans"><a href="/StatusUpdate" onClick={() => setToggleMenu(false)}>Status Update</a></li>
               <li className="p__opensans"><a href="#about" onClick={() => setToggleMenu(false)}>Received Requests</a></li>
-              <li className="p__opensans"><a href="#contact" onClick={() => setToggleMenu(false)}>Edit Profile</a></li>
+              <li className="p__opensans"><a href="/registerAsDriver?purpose=editProfile" onClick={() => setToggleMenu(false)}>Edit Profile</a></li>
               <li className="p__opensans"><a href="#" onClick={() => { setToggleMenu(false); handleLogout(); }}>Log Out</a></li>
             </ul>
           </div>

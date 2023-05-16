@@ -1,6 +1,27 @@
-.box{
-    align-items: center;
-  }
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.header {
+  background-color: #73572a;
+  padding: 20px;
+  color: #fff;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.search-button{
+  margin-top: 20px;
+}
   
   .container {
       height: 100%;

@@ -112,7 +112,17 @@ import { colors } from './constants/colors';
         const username = localStorage.getItem('username');
         const response = services.updateDriverProfile(username, registerExperience, registerPhoneNo, regsiterLocation, registerFare);
 
-        if(response === "Failed to update profile" || response === "Error updating profile"){
+        if(response === "Failed to update profile" ){
+          toast({
+            title: 'Error',
+            description: response,
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+
+        else if(response === "Error updating profile"){
           toast({
             title: 'Error',
             description: response,

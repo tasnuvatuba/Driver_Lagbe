@@ -10,7 +10,7 @@
   margin: 20px 0;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   width: 400px; /* Fixed card width */
-  height: 400px; /* Fixed card height */
+  height: 350px; /* Fixed card height */
 }
 
 .card::before{
@@ -113,7 +113,7 @@
 .card .rating i{
   font-size: 18px;
   margin: 0 2px;
-  color: #7d2ae8;
+  color: #896d41;
 }
 
 .card .Button{

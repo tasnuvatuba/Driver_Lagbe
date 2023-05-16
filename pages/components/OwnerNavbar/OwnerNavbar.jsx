@@ -7,6 +7,7 @@ import { Button, ButtonGroup, Center } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import Link from "next/link";
 
+
 import {
   Menu,
   MenuButton,
@@ -59,21 +60,21 @@ const Navbar = ({username}) => {
         {/* <li><a href="/profile"><image src = "/user.png"></image></a></li> */}
 
         <div />
-    
+     
         <Menu>
           <MenuButton as={Button}>
-            Actions
+            What you can do
           </MenuButton>
           <MenuList>
-            <MenuItem>Book For Now</MenuItem>
-            <MenuItem>Book For Later</MenuItem>
-            <MenuItem>
+            <MenuItem><a href="#booking">Book For Now</a></MenuItem>
+            <MenuItem><a href="#booking">Book For Later</a></MenuItem>
+            <MenuItem><a href="#intro">
               <Link href={{pathname: '../sentRequest', query:{username}}}>
                 <a>Sent Requests</a>
               </Link>
-            </MenuItem>
-            <MenuItem>All Drivers</MenuItem>
-            <MenuItem>Edit Profile</MenuItem>
+            </a></MenuItem>
+            <MenuItem><a href="/AllDrivers">All Drivers</a></MenuItem>
+            <MenuItem><a href="/registerAsOwner?purpose=editProfile">Edit Profile</a></MenuItem>
             <MenuDivider />
             <MenuItem onClick={handleLogout}>Log Out</MenuItem>
             
@@ -86,11 +87,11 @@ const Navbar = ({username}) => {
           <div className="app__drivernavbar-smallscreen_overlay flex__center slide-bottom">
             <AiFillCar fontSize={27} className="overlay__close" onClick={() => setToggleMenu(false)} />
             <ul className="app__drivernavbar-smallscreen_links">
-              <li className="p__opensans"><a href="#home" onClick={() => setToggleMenu(false)}>Book For Now</a></li>
-              <li className="p__opensans"><a href="#home" onClick={() => setToggleMenu(false)}>Book For Later</a></li>
+              <li className="p__opensans"><a href="#booking" onClick={() => setToggleMenu(false)}>Book For Now</a></li>
+              <li className="p__opensans"><a href="#booking" onClick={() => setToggleMenu(false)}>Book For Later</a></li>
               <li className="p__opensans"><a href="#about" onClick={() => setToggleMenu(false)}>Sent Requests</a></li>
-              <li className="p__opensans"><a href="#services" onClick={() => setToggleMenu(false)}>All Drivers</a></li>
-              <li className="p__opensans"><a href="#contact" onClick={() => setToggleMenu(false)}>Edit Profile</a></li>
+              <li className="p__opensans"><a href="/AvailableDriver" onClick={() => setToggleMenu(false)}>All Drivers</a></li>
+              <li className="p__opensans"><a href="/registerAsOwner?purpose=editProfile" onClick={() => setToggleMenu(false)}>Edit Profile</a></li>
               <li className="p__opensans"><a href="#" onClick={() => { setToggleMenu(false); handleLogout(); }}>Log Out</a></li>
             </ul>
           </div>
