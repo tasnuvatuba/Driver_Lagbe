@@ -79,7 +79,7 @@ const ProfileCard = ({img, name, desc, rating, fare, status, source}) => {
           <div className="name-desc">
             <div className="status-circle" style={{ backgroundColor: statusColor }}></div>
             <span className="name">{name}</span>
-            <span className="desc">{desc}</span>
+            {/* <span className="desc">{desc}</span> */}
             <span className="fare">TK {fare}/hour</span>
           </div>
 

@@ -5,6 +5,8 @@ import './AvailableDriver.css';
 import { Radio, RadioGroup, Stack, Button} from '@chakra-ui/react';
 import Link from 'next/link';
 import Head from 'next/head';
+import {FaMapMarkerAlt} from  'react-icons/fa';
+
 
 
 export default function AvailableDriver() {
@@ -50,20 +52,21 @@ export default function AvailableDriver() {
       <Head>
         <title>Available Drivers | Driver Lagbe</title>
       </Head>
-      
       <div className='container mx-auto py-36 px-8 '>
-
-
+      <header className="header">
+          <h1>Available Drivers</h1>
+        </header>
+    
       <Link 
         href="/SearchByLocation"
         >
         <a>
         <Button
-          colorScheme="teal"
-          size="md"
-          mb={4}
-          className="search-button"
-        >
+              size="md"
+              mb={4}
+              className="search-button"
+              leftIcon={<FaMapMarkerAlt style={{ color: 'red' }} />}
+            >
           Search by Location
         </Button>
         </a>
@@ -72,10 +75,10 @@ export default function AvailableDriver() {
 
       <RadioGroup value={sortingOption} onChange={handleSortingOptionChange} mb={4}>
         <Stack direction="row" spacing={4}>
-          <Radio value="rating-high-to-low">Rating: High to Low</Radio>
-          <Radio value="rating-low-to-high">Rating: Low to High</Radio>
-          <Radio value="fare-high-to-low">Fare: High to Low</Radio>
-          <Radio value="fare-low-to-high">Fare: Low to High</Radio>
+        <Radio value="rating-high-to-low">Sort By Rate: High to Low</Radio>
+          <Radio value="rating-low-to-high">Sort By Rate: Low to High</Radio>
+          <Radio value="fare-high-to-low">Sort By Fare: High to Low</Radio>
+          <Radio value="fare-low-to-high">Sort By Fare: Low to High</Radio>
         </Stack>
       </RadioGroup>
 

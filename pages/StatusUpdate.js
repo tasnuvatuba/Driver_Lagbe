@@ -51,7 +51,17 @@ function StatusUpdate() {
    
     const response = services.updateStatus(username, latitude, longitude, status);
 
-    if(response === "Failed to update status" || response === "Error updating status"){
+    if(response === "Failed to update status"){
+      toast({
+        title: 'Error',
+        description: response,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+    
+    else if(response === "Error updating status"){
       toast({
         title: 'Error',
         description: response,
@@ -92,12 +102,13 @@ const handleToggle = () => {
 
   return (
     <div
-    style={{
+      style={{
         display: "flex",
         flexDirection: "column",
         width: "100vw",
         height: "100vh",
-    }}
+        minWidth: "320px", // Set the minimum width to the size of the phone
+      }}
     >
     <div style={{ width: "100%", height: "80%" , padding: '2rem'}}>
         <OpenStreetMap />

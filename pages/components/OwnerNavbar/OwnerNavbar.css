@@ -13,6 +13,7 @@
     border-radius: 50%;
     height: 38px;
     height: 38px;
+    margin-right: 2rem;
 }
 .app__drivernavbar-links {
     flex: 1;
@@ -37,6 +38,7 @@
     justify-content: flex-end;
     align-items: center;
 }
+
 
 .app__drivernavbar-features a {
     margin: 0 1rem;
